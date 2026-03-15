@@ -1,5 +1,5 @@
 import { useLocation, Link } from "wouter";
-import { LayoutDashboard, ListChecks, Calendar, LogOut, Sparkles, ExternalLink } from "lucide-react";
+import { LayoutDashboard, ListChecks, Calendar, LogOut, Sparkles, ExternalLink, User, ChevronDown } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -22,6 +22,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function AppSidebar() {
   const [location] = useLocation();
@@ -31,11 +38,12 @@ export function AppSidebar() {
 
   const displayName = user?.user_metadata?.full_name || user?.user_metadata?.name || user?.email?.split("@")[0] || null;
   const displayEmail = user?.email || null;
+  const initials = (displayName || displayEmail || "U").charAt(0).toUpperCase();
 
   return (
     <Sidebar data-testid="sidebar-nav">
       <SidebarHeader className="p-4 pb-3">
-        <Link href="/">
+        <Link href="/dashboard">
           <PayraLogo />
         </Link>
       </SidebarHeader>
@@ -45,7 +53,7 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild data-active={location === "/dashboard" || location === "/"}>
+                <SidebarMenuButton asChild data-active={location === "/dashboard"}>
                   <Link href="/dashboard">
                     <LayoutDashboard className="h-4 w-4" />
                     <span>Dashboard</span>
@@ -120,34 +128,49 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="p-3 space-y-2">
-        {/* User info */}
+        {/* User dropdown */}
         {isSupabaseConfigured && user && (
-          <div className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-accent/50 transition-colors">
-            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center shrink-0 ring-1 ring-primary/10">
-              <span className="text-xs font-semibold text-primary">
-                {(displayName || "U").charAt(0).toUpperCase()}
-              </span>
-            </div>
-            <div className="flex-1 min-w-0">
-              {displayName && (
-                <p className="text-xs font-medium truncate leading-tight">{displayName}</p>
-              )}
-              {displayEmail && (
-                <p className="text-[10px] text-muted-foreground truncate leading-tight">{displayEmail}</p>
-              )}
-            </div>
-            <button
-              onClick={signOut}
-              className="text-muted-foreground hover:text-foreground transition-colors shrink-0 p-1 rounded-md hover:bg-accent"
-              title="Sign out"
-              data-testid="button-logout"
-            >
-              <LogOut className="h-3.5 w-3.5" />
-            </button>
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className="w-full flex items-center gap-2.5 px-2 py-2 rounded-lg hover:bg-accent/50 transition-colors text-left"
+                data-testid="button-user-menu"
+              >
+                <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center shrink-0 ring-1 ring-primary/10">
+                  <span className="text-xs font-semibold text-primary">
+                    {initials}
+                  </span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  {displayName && (
+                    <p className="text-xs font-medium truncate leading-tight">{displayName}</p>
+                  )}
+                  {displayEmail && (
+                    <p className="text-[10px] text-muted-foreground truncate leading-tight">{displayEmail}</p>
+                  )}
+                </div>
+                <ChevronDown className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <div className="px-2 py-1.5">
+                {displayName && <p className="text-sm font-medium">{displayName}</p>}
+                {displayEmail && <p className="text-xs text-muted-foreground">{displayEmail}</p>}
+              </div>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={signOut}
+                className="text-destructive focus:text-destructive cursor-pointer"
+                data-testid="button-logout"
+              >
+                <LogOut className="h-3.5 w-3.5 mr-2" />
+                Sign out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         )}
 
-        {/* CTA — refined, less aggressive */}
+        {/* CTA */}
         <a
           href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=sidebar&utm_campaign=persistent-cta`}
           target="_blank"

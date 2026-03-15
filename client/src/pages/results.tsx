@@ -4,33 +4,45 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useResults } from "@/lib/store";
 import { TOOLS, PAYRA_CTA_URL, PAYRA_DEMO_URL } from "@/lib/constants";
-import { ArrowRight, ClipboardList, Sparkles, ExternalLink, BarChart3 } from "lucide-react";
+import { ArrowRight, ClipboardList, Sparkles, ExternalLink, BarChart3, Clock, FileText } from "lucide-react";
 
 export default function Results() {
   const { results, completedCount } = useResults();
 
   return (
     <div className="page-container space-y-6" data-testid="page-results">
-      <div className="space-y-1.5">
-        <h1 className="text-xl font-bold tracking-tight">My Results</h1>
-        <p className="text-sm text-muted-foreground">
-          View results from all completed diagnostic tools.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="space-y-1.5">
+          <h1 className="text-xl font-bold tracking-tight">My Results</h1>
+          <p className="text-sm text-muted-foreground">
+            {completedCount === 0
+              ? "View results from all completed diagnostic tools."
+              : `${completedCount} of ${TOOLS.length} tools completed`
+            }
+          </p>
+        </div>
+        {completedCount > 0 && completedCount < TOOLS.length && (
+          <Button asChild size="sm" variant="outline" className="gap-1.5 shrink-0 self-start">
+            <Link href="/dashboard">
+              Continue Audit <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </Button>
+        )}
       </div>
 
       {completedCount === 0 ? (
-        <Card className="p-12 text-center space-y-4">
+        <Card className="p-12 text-center space-y-4 border-dashed">
           <div className="mx-auto h-12 w-12 rounded-xl bg-muted flex items-center justify-center">
-            <ClipboardList className="h-6 w-6 text-muted-foreground" />
+            <FileText className="h-6 w-6 text-muted-foreground" />
           </div>
           <div className="space-y-1.5">
             <h2 className="font-semibold text-base">No results yet</h2>
             <p className="text-sm text-muted-foreground max-w-sm mx-auto">
-              Complete your first diagnostic tool to see results here.
+              Complete your first diagnostic tool to see results here. Each tool takes 2–5 minutes.
             </p>
           </div>
           <Button asChild size="sm" className="gap-1.5">
-            <Link href="/dashboard">Go to Dashboard <ArrowRight className="h-3.5 w-3.5" /></Link>
+            <Link href="/dashboard" data-testid="link-go-dashboard">Go to Dashboard <ArrowRight className="h-3.5 w-3.5" /></Link>
           </Button>
         </Card>
       ) : (

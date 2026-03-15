@@ -5,27 +5,40 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { TOOLS, PAYRA_CTA_URL, PAYRA_DEMO_URL, formatPercent } from "@/lib/constants";
 import { useResults } from "@/lib/store";
-import { Check, ArrowRight, CircleCheck, Calendar, Sparkles, TrendingUp, ExternalLink } from "lucide-react";
+import { Check, ArrowRight, CircleCheck, Calendar, Sparkles, TrendingUp, ExternalLink, BarChart3, Clock } from "lucide-react";
 
 export default function Dashboard() {
   const { completedCount, isCompleted, overallScore, get } = useResults();
   const progress = (completedCount / TOOLS.length) * 100;
 
+  // Find the next uncompleted tool
+  const nextTool = TOOLS.find((t) => !isCompleted(t.id));
+
   return (
     <div className="page-container space-y-8" data-testid="page-dashboard">
       {/* Hero section */}
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold tracking-tight" data-testid="text-welcome">AR Diagnostics</h1>
-          {overallScore !== null && (
-            <Badge variant="outline" className="font-semibold text-primary border-primary/20 bg-primary/5">
-              Score: {Math.round(overallScore)}/100
-            </Badge>
-          )}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="space-y-1.5">
+          <div className="flex items-center gap-2.5">
+            <h1 className="text-xl font-bold tracking-tight" data-testid="text-welcome">AR Diagnostics</h1>
+            {overallScore !== null && (
+              <Badge variant="outline" className="font-semibold text-primary border-primary/20 bg-primary/5">
+                Score: {Math.round(overallScore)}/100
+              </Badge>
+            )}
+          </div>
+          <p className="text-sm text-muted-foreground max-w-xl">
+            Run diagnostics on your accounts receivable process. Each tool takes 2–5 minutes and surfaces actionable insights.
+          </p>
         </div>
-        <p className="text-sm text-muted-foreground max-w-xl">
-          Run diagnostics on your accounts receivable process. Each tool takes 2–5 minutes and surfaces actionable insights.
-        </p>
+        {nextTool && completedCount < TOOLS.length && (
+          <Button asChild size="sm" className="gap-1.5 shrink-0 self-start">
+            <Link href={nextTool.path} data-testid="button-continue-audit">
+              {completedCount === 0 ? "Start Audit" : "Continue Audit"}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </Button>
+        )}
       </div>
 
       {/* Progress section — only show if started */}
@@ -85,6 +98,25 @@ export default function Dashboard() {
         </Card>
       )}
 
+      {/* Empty state for first-time users */}
+      {completedCount === 0 && (
+        <Card className="p-8 text-center space-y-4 border-dashed">
+          <div className="mx-auto h-12 w-12 rounded-xl bg-primary/8 flex items-center justify-center">
+            <BarChart3 className="h-6 w-6 text-primary" />
+          </div>
+          <div className="space-y-1.5">
+            <h2 className="font-semibold text-base">Start your first diagnostic</h2>
+            <p className="text-sm text-muted-foreground max-w-sm mx-auto">
+              Choose a tool below to begin. We recommend starting with the AR Health Scorecard for a broad overview.
+            </p>
+          </div>
+          <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+            <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> ~20 min total</span>
+            <span className="flex items-center gap-1"><BarChart3 className="h-3 w-3" /> 7 tools</span>
+          </div>
+        </Card>
+      )}
+
       {/* Tool Cards — refined grid */}
       <div className="space-y-3">
         <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Diagnostic Tools</h2>
@@ -137,7 +169,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Bottom CTA — refined, less cluttered */}
+      {/* Bottom CTA */}
       <Card className="p-6 bg-gradient-to-r from-primary/5 to-transparent border-primary/10 relative overflow-hidden">
         <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div className="flex-1 space-y-1">

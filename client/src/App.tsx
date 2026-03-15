@@ -48,34 +48,10 @@ function ProtectedRoute({ component: Component }: { component: React.ComponentTy
   return <Component />;
 }
 
-/** Root route: if logged in go to dashboard, otherwise go to login */
-function RootRedirect() {
-  const { user, loading } = useAuth();
-  const [timedOut, setTimedOut] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setTimedOut(true), 5000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!isSupabaseConfigured) return <Landing />;
-
-  // If still loading and haven't timed out, show spinner
-  if (loading && !timedOut) {
-    return (
-      <div className="flex items-center justify-center h-full min-h-screen">
-        <Loader2 className="h-5 w-5 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  return <Redirect to={user ? "/dashboard" : "/login"} />;
-}
-
 function AppRoutes() {
   return (
     <Switch>
-      <Route path="/" component={RootRedirect} />
+      <Route path="/" component={Landing} />
       <Route path="/login" component={Login} />
       <Route path="/dashboard">{() => <ProtectedRoute component={Dashboard} />}</Route>
       <Route path="/results">{() => <ProtectedRoute component={Results} />}</Route>
@@ -94,7 +70,7 @@ function AppRoutes() {
 /** Get current page title from route */
 function usePageTitle() {
   const [location] = useLocation();
-  if (location === "/dashboard" || location === "/") return "Dashboard";
+  if (location === "/dashboard") return "Dashboard";
   if (location === "/results") return "My Results";
   const tool = TOOLS.find(t => t.path === location);
   if (tool) return tool.name;
@@ -125,11 +101,10 @@ function TopBar() {
 
 function AppLayout() {
   const [location] = useLocation();
-  const isLogin = location === "/login";
-  const isRoot = location === "/";
+  const isPublicPage = location === "/" || location === "/login";
 
-  // Login and root redirect get their own full-screen layouts
-  if (isLogin || isRoot) {
+  // Landing and login get their own full-screen layouts
+  if (isPublicPage) {
     return (
       <div className="min-h-screen">
         <AppRoutes />

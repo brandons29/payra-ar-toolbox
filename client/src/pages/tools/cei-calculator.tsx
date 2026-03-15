@@ -69,9 +69,9 @@ export default function CEICalculator() {
   const gaugeAngle = (calcs.cei / 100) * 180 - 90; // -90 to 90 degrees
 
   return (
-    <div className="p-6 max-w-4xl mx-auto space-y-6" data-testid="page-cei">
+    <div className="page-container space-y-6" data-testid="page-cei">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold">CEI Calculator</h1>
+        <h1 className="text-xl font-bold tracking-tight">CEI Calculator</h1>
         <p className="text-sm text-muted-foreground">
           Measure your Collection Effectiveness Index — the percentage of receivables collected in a given period.
         </p>
@@ -79,7 +79,7 @@ export default function CEICalculator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Inputs */}
-        <Card className="lg:col-span-2 p-5 space-y-4">
+        <Card className="lg:col-span-2 p-6 space-y-5 self-start lg:sticky lg:top-20">
           <h2 className="font-semibold text-sm">Period Data</h2>
           {[
             { label: "Beginning AR Balance", value: beginningAR, setter: setBeginningAR, id: "beginning-ar" },

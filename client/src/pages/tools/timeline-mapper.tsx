@@ -76,9 +76,9 @@ export default function TimelineMapper() {
 
   if (showResults) {
     return (
-      <div className="p-6 max-w-4xl mx-auto space-y-6" data-testid="page-timeline-results">
+      <div className="page-container space-y-6" data-testid="page-timeline-results">
         <div className="flex items-center justify-between gap-2">
-          <h1 className="text-xl font-bold">Invoice-to-Cash Timeline Results</h1>
+          <h1 className="text-xl font-bold tracking-tight">Invoice-to-Cash Timeline Results</h1>
           <Button variant="secondary" size="sm" onClick={() => { setShowResults(false); setCurrentStep(0); }}>
             Edit Inputs
           </Button>
@@ -88,15 +88,15 @@ export default function TimelineMapper() {
         <Card className="p-5 space-y-3">
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Total Cycle Time</p>
+              <p className="metric-label">Total Cycle Time</p>
               <p className="text-xl font-bold text-primary">{totalDays} days</p>
             </div>
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Benchmark</p>
+              <p className="metric-label">Benchmark</p>
               <p className="text-lg font-bold">{totalBenchmark.toFixed(1)} days</p>
             </div>
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Internal Bottlenecks</p>
+              <p className="metric-label">Internal Bottlenecks</p>
               <p className="text-lg font-bold">{calcs.internalDays} days you control</p>
             </div>
           </div>
@@ -107,7 +107,7 @@ export default function TimelineMapper() {
 
         {/* Timeline Chart */}
         <Card className="p-5">
-          <h3 className="font-semibold text-sm mb-3">Timeline Breakdown</h3>
+          <h3 className="text-sm font-semibold mb-4">Timeline Breakdown</h3>
           <ResponsiveContainer width="100%" height={240}>
             <BarChart data={calcs.chartData} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -130,7 +130,7 @@ export default function TimelineMapper() {
 
         {/* Step Details */}
         <Card className="p-5">
-          <h3 className="font-semibold text-sm mb-3">Step-by-Step Analysis</h3>
+          <h3 className="text-sm font-semibold mb-4">Step-by-Step Analysis</h3>
           <div className="space-y-2">
             {STEPS.map((step, i) => (
               <div key={i} className="flex items-center justify-between gap-2 py-2 border-b last:border-0">
@@ -178,7 +178,7 @@ export default function TimelineMapper() {
   return (
     <div className="p-6 max-w-3xl mx-auto space-y-6" data-testid="page-timeline">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold">Invoice-to-Cash Timeline Mapper</h1>
+        <h1 className="text-xl font-bold tracking-tight">Invoice-to-Cash Timeline Mapper</h1>
         <p className="text-sm text-muted-foreground">Map each step in your invoice-to-cash cycle to find bottlenecks.</p>
       </div>
 

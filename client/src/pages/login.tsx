@@ -10,7 +10,7 @@ import { isSupabaseConfigured } from "@/lib/supabase";
 import { PAYRA_DEMO_URL } from "@/lib/constants";
 import { PerplexityAttribution } from "@/components/PerplexityAttribution";
 import { BlueprintGrid } from "@/components/ConstructionPatterns";
-import { Loader2, Calendar } from "lucide-react";
+import { Loader2, Sparkles, ExternalLink, Shield } from "lucide-react";
 import { SiGoogle } from "react-icons/si";
 
 // Inline Microsoft logo – not available in react-icons/si
@@ -75,14 +75,16 @@ export default function Login() {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-background">
         <BlueprintGrid />
-        <Card className="w-full max-w-md p-6 space-y-4 relative z-10">
-          <div className="text-center space-y-2">
-            <PayraLogoFull />
-            <p className="text-sm text-muted-foreground mt-4">
-              Supabase is not configured yet. Add these environment variables to enable authentication:
+        <Card className="w-full max-w-md p-8 space-y-5 relative z-10">
+          <div className="text-center space-y-3">
+            <div className="flex justify-center">
+              <PayraLogoFull />
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Supabase is not configured. Add these environment variables to enable authentication:
             </p>
           </div>
-          <div className="bg-muted rounded-md p-3 text-xs font-mono space-y-1">
+          <div className="bg-muted rounded-lg p-4 text-xs font-mono space-y-1 border border-border/50">
             <p>VITE_SUPABASE_URL=https://your-project.supabase.co</p>
             <p>VITE_SUPABASE_ANON_KEY=eyJ...</p>
           </div>
@@ -97,10 +99,10 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-background">
       <BlueprintGrid />
-      <div className="w-full max-w-md space-y-4 relative z-10">
-        <Card className="p-6 space-y-5">
-          {/* Logo */}
-          <div className="text-center space-y-1">
+      <div className="w-full max-w-[400px] space-y-5 relative z-10">
+        <Card className="p-8 space-y-6">
+          {/* Logo + tagline */}
+          <div className="text-center space-y-2">
             <div className="flex justify-center">
               <PayraLogoFull />
             </div>
@@ -110,16 +112,16 @@ export default function Login() {
           </div>
 
           {signupSuccess && (
-            <div className="bg-primary/10 border border-primary/20 rounded-md p-3 text-sm text-center text-primary">
+            <div className="bg-primary/8 border border-primary/15 rounded-lg p-3 text-sm text-center text-primary">
               Check your email for a confirmation link, then sign in.
             </div>
           )}
 
           {/* OAuth Buttons */}
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             <Button
               variant="outline"
-              className="w-full gap-2"
+              className="w-full gap-2.5 h-10"
               onClick={handleGoogle}
               disabled={!!oauthLoading}
               data-testid="button-google-login"
@@ -133,7 +135,7 @@ export default function Login() {
             </Button>
             <Button
               variant="outline"
-              className="w-full gap-2"
+              className="w-full gap-2.5 h-10"
               onClick={handleMicrosoft}
               disabled={!!oauthLoading}
               data-testid="button-microsoft-login"
@@ -149,28 +151,28 @@ export default function Login() {
 
           <div className="flex items-center gap-3">
             <Separator className="flex-1" />
-            <span className="text-xs text-muted-foreground">or</span>
+            <span className="text-xs text-muted-foreground font-medium">or</span>
             <Separator className="flex-1" />
           </div>
 
           {/* Email Form */}
-          <form onSubmit={handleEmailSubmit} className="space-y-3">
+          <form onSubmit={handleEmailSubmit} className="space-y-4">
             {mode === "signup" && (
-              <div className="space-y-1">
-                <Label htmlFor="fullName" className="text-sm">Full Name</Label>
+              <div className="space-y-1.5">
+                <Label htmlFor="fullName" className="text-sm font-medium">Full Name</Label>
                 <Input
                   id="fullName"
                   type="text"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="John Smith"
-                  className="text-sm"
+                  className="h-10"
                   data-testid="input-full-name"
                 />
               </div>
             )}
-            <div className="space-y-1">
-              <Label htmlFor="email" className="text-sm">Email</Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="email" className="text-sm font-medium">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -178,12 +180,12 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@company.com"
                 required
-                className="text-sm"
+                className="h-10"
                 data-testid="input-email"
               />
             </div>
-            <div className="space-y-1">
-              <Label htmlFor="password" className="text-sm">Password</Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="password" className="text-sm font-medium">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -192,7 +194,7 @@ export default function Login() {
                 placeholder="••••••••"
                 required
                 minLength={6}
-                className="text-sm"
+                className="h-10"
                 data-testid="input-password"
               />
             </div>
@@ -201,8 +203,8 @@ export default function Login() {
               <p className="text-xs text-destructive" data-testid="text-auth-error">{error}</p>
             )}
 
-            <Button type="submit" className="w-full" disabled={submitting} data-testid="button-email-submit">
-              {submitting && <Loader2 className="h-4 w-4 mr-1 animate-spin" />}
+            <Button type="submit" className="w-full h-10" disabled={submitting} data-testid="button-email-submit">
+              {submitting && <Loader2 className="h-4 w-4 mr-1.5 animate-spin" />}
               {mode === "signup" ? "Create Account" : "Sign In"}
             </Button>
           </form>
@@ -212,14 +214,14 @@ export default function Login() {
             {mode === "login" ? (
               <>
                 Don't have an account?{" "}
-                <button onClick={() => { setMode("signup"); setError(""); }} className="text-primary font-medium" data-testid="button-toggle-signup">
+                <button onClick={() => { setMode("signup"); setError(""); }} className="text-primary font-medium hover:underline" data-testid="button-toggle-signup">
                   Sign up
                 </button>
               </>
             ) : (
               <>
                 Already have an account?{" "}
-                <button onClick={() => { setMode("login"); setError(""); }} className="text-primary font-medium" data-testid="button-toggle-login">
+                <button onClick={() => { setMode("login"); setError(""); }} className="text-primary font-medium hover:underline" data-testid="button-toggle-login">
                   Sign in
                 </button>
               </>
@@ -227,19 +229,21 @@ export default function Login() {
           </p>
         </Card>
 
-        {/* Demo CTA below login */}
-        <Card className="p-4 text-center space-y-2 bg-primary/5 border-primary/15">
-          <p className="text-sm text-muted-foreground">
-            Want to see Payra in action first?
-          </p>
-          <Button asChild variant="outline" size="sm" className="gap-1.5">
+        {/* Demo CTA below login — refined */}
+        <Card className="p-4 flex items-center gap-3 border-primary/10 bg-primary/[0.03]">
+          <div className="flex-1">
+            <p className="text-sm text-muted-foreground">
+              Want to see Payra in action first?
+            </p>
+          </div>
+          <Button asChild variant="outline" size="sm" className="gap-1.5 shrink-0">
             <a
               href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=login&utm_campaign=pre-signup`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Calendar className="h-3.5 w-3.5" />
-              Schedule a Demo
+              Get Demo
+              <ExternalLink className="h-3 w-3 opacity-60" />
             </a>
           </Button>
         </Card>

@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Switch, Route, Router, Redirect } from "wouter";
 import { useHashLocation } from "wouter/use-hash-location";
 import { queryClient } from "./lib/queryClient";
@@ -8,7 +7,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { AuthProvider, useAuth } from "@/lib/auth";
-import { isSupabaseConfigured } from "@/lib/supabase";
 import NotFound from "@/pages/not-found";
 import Landing from "@/pages/landing";
 import Login from "@/pages/login";
@@ -24,16 +22,12 @@ import ERPReadiness from "@/pages/tools/erp-readiness";
 import { useLocation } from "wouter";
 import { Loader2 } from "lucide-react";
 import { TOOLS } from "@/lib/constants";
-import { PayraLogo } from "@/components/PayraLogo";
 import { useResults } from "@/lib/store";
 import { Progress } from "@/components/ui/progress";
 
-/** Routes that require auth when Supabase is configured */
+/** Routes that require auth — always enforced */
 function ProtectedRoute({ component: Component }: { component: React.ComponentType }) {
   const { user, loading } = useAuth();
-
-  // If Supabase not configured, skip auth check (dev mode)
-  if (!isSupabaseConfigured) return <Component />;
 
   if (loading) {
     return (
@@ -101,10 +95,31 @@ function TopBar() {
 
 function AppLayout() {
   const [location] = useLocation();
+  const { user, loading } = useAuth();
   const isPublicPage = location === "/" || location === "/login";
 
   // Landing and login get their own full-screen layouts
   if (isPublicPage) {
+    return (
+      <div className="min-h-screen">
+        <AppRoutes />
+      </div>
+    );
+  }
+
+  // While auth is resolving, show a minimal loading state instead of the
+  // full sidebar chrome (prevents briefly exposing protected layout).
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader2 className="h-5 w-5 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  // Unauthenticated users on protected routes: render routes only so the
+  // ProtectedRoute redirect fires without exposing the sidebar.
+  if (!user) {
     return (
       <div className="min-h-screen">
         <AppRoutes />

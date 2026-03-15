@@ -4,7 +4,6 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PayraLogoFull } from "@/components/PayraLogo";
 import { TOOLS, PAYRA_CTA_URL, PAYRA_DEMO_URL } from "@/lib/constants";
-import { isSupabaseConfigured } from "@/lib/supabase";
 import { useAuth } from "@/lib/auth";
 import {
   ArrowRight,
@@ -60,8 +59,8 @@ const trustLogos = [
 
 export default function Landing() {
   const { user } = useAuth();
-  const entryPath = !isSupabaseConfigured ? "/dashboard" : user ? "/dashboard" : "/login";
-  const signupPath = !isSupabaseConfigured ? "/dashboard" : "/login?mode=signup";
+  const entryPath = user ? "/dashboard" : "/login";
+  const signupPath = user ? "/dashboard" : "/login?mode=signup";
 
   return (
     <div className="min-h-screen bg-background">
@@ -100,14 +99,14 @@ export default function Landing() {
                 <Calendar className="mr-1.5 h-3.5 w-3.5" /> Talk to AR Experts
               </a>
             </Button>
-            {isSupabaseConfigured && !user && (
+            {!user && (
               <Button asChild size="sm" variant="ghost">
                 <Link href="/login" data-testid="link-sign-in">Sign In</Link>
               </Button>
             )}
             <Button asChild size="sm">
               <Link href={entryPath} data-testid="link-get-started">
-                {isSupabaseConfigured && !user ? "Run Your Free AR Audit" : "Go to Dashboard"}
+                {!user ? "Run Your Free AR Audit" : "Go to Dashboard"}
                 <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
               </Link>
             </Button>

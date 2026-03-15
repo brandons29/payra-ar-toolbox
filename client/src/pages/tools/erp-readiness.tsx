@@ -76,8 +76,8 @@ export default function ERPReadiness() {
 
   if (showResults) {
     return (
-      <div className="p-6 max-w-3xl mx-auto space-y-6" data-testid="page-erp-results">
-        <h1 className="text-xl font-bold">ERP Readiness Results</h1>
+      <div className="page-container max-w-3xl space-y-6" data-testid="page-erp-results">
+        <h1 className="text-xl font-bold tracking-tight">ERP Readiness Results</h1>
 
         <Card className="p-6 text-center space-y-4">
           {erpData ? (
@@ -111,11 +111,11 @@ export default function ERPReadiness() {
             <Card className="p-5 space-y-3">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide">Setup Timeline</p>
+                  <p className="metric-label">Setup Timeline</p>
                   <p className="text-lg font-bold">{erpData.days} business days</p>
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide">Complexity</p>
+                  <p className="metric-label">Complexity</p>
                   <p className="text-lg font-bold capitalize">{erpData.complexity}</p>
                 </div>
               </div>
@@ -157,9 +157,9 @@ export default function ERPReadiness() {
   }
 
   return (
-    <div className="p-6 max-w-3xl mx-auto space-y-6" data-testid="page-erp">
+    <div className="page-container max-w-3xl space-y-6" data-testid="page-erp">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold">ERP Readiness Check</h1>
+        <h1 className="text-xl font-bold tracking-tight">ERP Readiness Check</h1>
         <p className="text-sm text-muted-foreground">
           Check Payra's compatibility with your ERP system and see estimated setup time.
         </p>

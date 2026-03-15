@@ -210,17 +210,17 @@ export default function AgingAnalyzer() {
           {/* Inline CTA if high risk */}
           {(calcs.riskRating === "High" || calcs.riskRating === "Critical") && (
             <InlineDemoCTA
-              message={`With ${formatCurrency(calcs.totalExposure)} at risk, see how Payra recovers overdue receivables before they become write-offs.`}
+              message={`${formatCurrency(calcs.totalExposure)} at risk of write-off. See how Payra's automated collections recover overdue cash before it hits your P&L.`}
               utmContent="aging-high-risk"
             />
           )}
 
           <BridgeToPayra
-            heading="Recover Overdue Cash Faster"
-            body={`Payra's automated collection sequences reduce the 60+ day bucket by 75% within 90 days. That could recover up to ${formatCurrency(calcs.aggressiveRecovery)} of your overdue receivables.`}
+            heading="Recover overdue cash before it becomes bad debt"
+            body={`Payra's automated collection sequences reduce 60+ day balances by 75% within 90 days. For your portfolio, that could recover up to ${formatCurrency(calcs.aggressiveRecovery)} in overdue receivables — without adding headcount.`}
             stat="75%"
             statLabel="Reduction in 60+ day receivables"
-            ctaText="Schedule a Collections Review"
+            ctaText="Show Me the Recovery Plan"
             utmContent="aging-analyzer"
           />
         </div>

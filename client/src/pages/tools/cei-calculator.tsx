@@ -179,17 +179,17 @@ export default function CEICalculator() {
           {/* Inline CTA when below top quartile */}
           {calcs.cei < 90 && (
             <InlineDemoCTA
-              message={`Closing a ${formatPercent(90 - calcs.cei)} gap to top-quartile CEI means collecting ${formatCurrency((90 - calcs.cei) * calcs.dollarPerPoint)} more per period. Let's show you how.`}
+              message={`A ${formatPercent(90 - calcs.cei)} gap to top-quartile CEI = ${formatCurrency((90 - calcs.cei) * calcs.dollarPerPoint)} in uncollected cash each period. Let us show you the fastest way to close it.`}
               utmContent="cei-below-90"
             />
           )}
 
           <BridgeToPayra
-            heading="Push Your CEI Above 90%"
-            body={`Payra's automated follow-up and customer portal push CEI above 90% by making it effortless for customers to pay. That means collecting ${formatCurrency((90 - Math.min(calcs.cei, 89)) * calcs.dollarPerPoint)} more per period.`}
+            heading="Push your CEI above 90% — automatically"
+            body={`Payra's automated follow-ups and self-service payment portal make it effortless for customers to pay on time. That means collecting ${formatCurrency((90 - Math.min(calcs.cei, 89)) * calcs.dollarPerPoint)} more per period — without chasing.`}
             stat=">90%"
             statLabel="Average CEI with Payra"
-            ctaText="Schedule a CEI Review"
+            ctaText="See How to Close the Gap"
             utmContent="cei-calculator"
           />
         </div>

@@ -16,15 +16,15 @@ export default function Results() {
           <h1 className="text-xl font-bold tracking-tight">My Results</h1>
           <p className="text-sm text-muted-foreground">
             {completedCount === 0
-              ? "View results from all completed diagnostic tools."
-              : `${completedCount} of ${TOOLS.length} tools completed`
+              ? "Complete your first diagnostic to see findings here."
+              : `${completedCount} of ${TOOLS.length} diagnostics complete — ${completedCount === TOOLS.length ? "full AR picture ready" : "keep going for the complete view"}`
             }
           </p>
         </div>
         {completedCount > 0 && completedCount < TOOLS.length && (
           <Button asChild size="sm" variant="outline" className="gap-1.5 shrink-0 self-start">
             <Link href="/dashboard">
-              Continue Audit <ArrowRight className="h-3.5 w-3.5" />
+              Finish Remaining Tools <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </Button>
         )}
@@ -36,13 +36,13 @@ export default function Results() {
             <FileText className="h-6 w-6 text-muted-foreground" />
           </div>
           <div className="space-y-1.5">
-            <h2 className="font-semibold text-base">No results yet</h2>
+            <h2 className="font-semibold text-base">No findings yet</h2>
             <p className="text-sm text-muted-foreground max-w-sm mx-auto">
-              Complete your first diagnostic tool to see results here. Each tool takes 2–5 minutes.
+              Run your first diagnostic to start building your AR picture. Each tool takes 2–5 minutes and shows real dollar figures.
             </p>
           </div>
           <Button asChild size="sm" className="gap-1.5">
-            <Link href="/dashboard" data-testid="link-go-dashboard">Go to Dashboard <ArrowRight className="h-3.5 w-3.5" /></Link>
+            <Link href="/dashboard" data-testid="link-go-dashboard">Start My First Diagnostic <ArrowRight className="h-3.5 w-3.5" /></Link>
           </Button>
         </Card>
       ) : (
@@ -86,12 +86,12 @@ export default function Results() {
             <Card className="p-5 bg-muted/30 flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <div className="flex-1">
                 <p className="text-sm text-muted-foreground">
-                  You've completed {completedCount} of {TOOLS.length} tools. Already seeing areas to improve?
+                  {completedCount} of {TOOLS.length} diagnostics done. Already seeing trapped cash or collections gaps?
                 </p>
               </div>
               <Button asChild variant="outline" size="sm" className="gap-1.5 shrink-0">
                 <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=results&utm_campaign=partial-complete`} target="_blank" rel="noopener noreferrer">
-                  <Sparkles className="h-3.5 w-3.5" /> Discuss Results
+                  <Sparkles className="h-3.5 w-3.5" /> Review Findings with an Expert
                 </a>
               </Button>
             </Card>
@@ -101,14 +101,14 @@ export default function Results() {
             <Card className="p-6 bg-gradient-to-r from-primary/5 to-transparent border-primary/10">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <div className="flex-1 space-y-1">
-                  <h2 className="text-sm font-semibold">All 7 Diagnostics Complete</h2>
+                  <h2 className="text-sm font-semibold">Full AR audit complete — your action plan is ready</h2>
                   <p className="text-sm text-muted-foreground">
-                    You've completed a full AR audit. Turn these insights into measurable improvements.
+                    You now have a data-backed picture of your DSO, trapped cash, aging risk, and process costs. See how Payra turns these numbers into faster collections.
                   </p>
                 </div>
                 <Button asChild className="gap-2 shrink-0">
                   <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=results&utm_campaign=all-complete`} target="_blank" rel="noopener noreferrer">
-                    <Sparkles className="h-3.5 w-3.5" /> Schedule Demo <ExternalLink className="h-3 w-3 opacity-60" />
+                    <Sparkles className="h-3.5 w-3.5" /> Get My Custom Improvement Plan <ExternalLink className="h-3 w-3 opacity-60" />
                   </a>
                 </Button>
               </div>

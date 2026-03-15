@@ -137,14 +137,14 @@ export default function ERPReadiness() {
         )}
 
         <BridgeToPayra
-          heading={erpData ? `Go Live with ${selectedERP} in ${erpData.days} Days` : "Let's Discuss Your ERP"}
+          heading={erpData ? `Go live on ${selectedERP} in ${erpData.days} days — no middleware` : "Let’s map your ERP integration"}
           body={erpData
-            ? `With ${selectedERP}, you'll be fully integrated in ${erpData.days} business days — with bidirectional sync, automated reconciliation, and zero manual re-keying. Schedule a demo to see the integration in action.`
-            : "We're actively adding new integrations. Let's discuss your specific ERP and build a custom integration plan."
+            ? `With ${selectedERP}, Payra integrates natively in ${erpData.days} business days — bidirectional sync, 99% auto-reconciliation, and zero manual re-keying. See the integration live.`
+            : "We're actively adding new ERP connectors. Let’s discuss your setup and map a custom integration path."
           }
           stat={erpData ? `${erpData.days} days` : undefined}
           statLabel={erpData ? "to full integration" : undefined}
-          ctaText={erpData ? "Schedule an Integration Demo" : "Schedule a Call About Your ERP"}
+          ctaText={erpData ? "See the Integration Roadmap" : "Discuss My ERP Setup"}
           utmContent={erpData ? `erp-${selectedERP.toLowerCase().replace(/\s+/g, "-")}` : "erp-other"}
         />
 

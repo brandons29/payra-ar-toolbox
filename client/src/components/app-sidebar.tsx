@@ -179,7 +179,7 @@ export function AppSidebar() {
           className="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium transition-all hover:opacity-90 active:scale-[0.98]"
         >
           <Sparkles className="h-3.5 w-3.5 shrink-0" />
-          <span className="flex-1">Get a Demo</span>
+          <span className="flex-1">Review My AR with Payra</span>
           <ExternalLink className="h-3 w-3 opacity-60 shrink-0" />
         </a>
       </SidebarFooter>

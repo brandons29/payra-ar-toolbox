@@ -23,38 +23,38 @@ import {
 import { BlueprintGrid } from "@/components/ConstructionPatterns";
 
 const stats = [
-  { value: "38%", label: "Average DSO Reduction", icon: TrendingDown },
-  { value: "99%", label: "Auto-Reconciliation Rate", icon: Zap },
-  { value: "16+", label: "Hours Saved Per Month", icon: Clock3 },
+  { value: "38%", label: "Average DSO reduction with Payra", icon: TrendingDown },
+  { value: "99%", label: "Auto-reconciliation accuracy", icon: Zap },
+  { value: "16+", label: "Hours reclaimed per month", icon: Clock3 },
 ];
 
 const outcomes = [
   {
     icon: DollarSign,
-    title: "Unlock trapped cash",
-    description: "See exactly how much revenue is stuck in slow-paying invoices and what it's costing you monthly.",
+    title: "Quantify trapped cash — down to the dollar",
+    description: "See exactly how much working capital is stuck in overdue invoices and the monthly carrying cost to your business.",
   },
   {
     icon: BarChart3,
-    title: "Benchmark against peers",
-    description: "Compare your DSO, CEI, and aging distribution to industry medians for construction, distribution, and industrial.",
+    title: "Benchmark DSO, CEI & aging vs. your industry",
+    description: "Compare your collections performance against real medians for construction, distribution, and industrial companies.",
   },
   {
     icon: Clock3,
-    title: "Find process bottlenecks",
-    description: "Map your invoice-to-cash timeline step by step and pinpoint where days are being lost.",
+    title: "Pinpoint where your invoice-to-cash cycle stalls",
+    description: "Map every step from invoice creation to payment posting and surface the exact stages costing you days.",
   },
   {
     icon: Shield,
-    title: "Assess bad debt exposure",
-    description: "Quantify risk in your receivables portfolio before write-offs hit the P&L.",
+    title: "Size your bad debt exposure before it hits the P&L",
+    description: "Break down risk concentration in your aging buckets so you can act on overdue accounts before they become write-offs.",
   },
 ];
 
 const trustLogos = [
   "Construction",
   "Distribution",
-  "Industrial",
+  "Industrial & Manufacturing",
   "Wholesale",
 ];
 
@@ -97,7 +97,7 @@ export default function Landing() {
                 rel="noopener noreferrer"
                 data-testid="link-demo-header"
               >
-                <Calendar className="mr-1.5 h-3.5 w-3.5" /> Book Demo
+                <Calendar className="mr-1.5 h-3.5 w-3.5" /> Talk to AR Experts
               </a>
             </Button>
             {isSupabaseConfigured && !user && (
@@ -107,7 +107,7 @@ export default function Landing() {
             )}
             <Button asChild size="sm">
               <Link href={entryPath} data-testid="link-get-started">
-                {isSupabaseConfigured && !user ? "Start Free Audit" : "Get Started"}
+                {isSupabaseConfigured && !user ? "Run Your Free AR Audit" : "Go to Dashboard"}
                 <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
               </Link>
             </Button>
@@ -121,20 +121,20 @@ export default function Landing() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-16 sm:pb-20 relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <Badge variant="secondary" className="text-xs font-medium px-3 py-1">
-              <Zap className="h-3 w-3 mr-1.5" /> Free for your business — no credit card required
+              <Zap className="h-3 w-3 mr-1.5" /> 100% free — no credit card, no commitment
             </Badge>
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground leading-tight" data-testid="text-hero-heading">
-              Your accounts receivable is leaking cash.{" "}
-              <span className="text-gradient-payra">Find out where.</span>
+              Stop leaving cash trapped in receivables.{" "}
+              <span className="text-gradient-payra">Find the leaks in 10 minutes.</span>
             </h1>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              7 free diagnostic tools built for construction, distribution, and industrial companies.
-              Audit your AR process, benchmark against your industry, and get a clear action plan — in under 10 minutes.
+              7 free diagnostic tools purpose-built for construction, distribution, and industrial AR leaders.
+              Benchmark your DSO, quantify trapped cash, expose collections bottlenecks, and get a prioritized action plan.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
               <Button asChild size="lg" className="w-full sm:w-auto gap-2 h-12 px-8 text-base">
                 <Link href={signupPath} data-testid="link-hero-cta">
-                  Start Your Free Audit
+                  Audit My AR — Free
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
@@ -146,14 +146,14 @@ export default function Landing() {
                   data-testid="link-hero-demo"
                 >
                   <Calendar className="h-4 w-4" />
-                  Book a Demo
+                  Review My AR with an Expert
                 </a>
               </Button>
             </div>
             <p className="text-xs text-muted-foreground flex items-center justify-center gap-4 pt-1">
               <span className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3 text-primary" /> No credit card</span>
-              <span className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3 text-primary" /> Takes 10 min</span>
-              <span className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3 text-primary" /> Instant results</span>
+              <span className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3 text-primary" /> Results in 10 min</span>
+              <span className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3 text-primary" /> Industry benchmarks included</span>
             </p>
           </div>
         </div>
@@ -163,7 +163,7 @@ export default function Landing() {
       <section className="border-y bg-muted/30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Built for</p>
+            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Purpose-built for</p>
             <div className="flex items-center gap-6 flex-wrap justify-center">
               {trustLogos.map((label) => (
                 <div key={label} className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -199,13 +199,13 @@ export default function Landing() {
       <section id="tools" className="py-16 sm:py-20 px-4 sm:px-6 bg-muted/20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center space-y-3 mb-12">
-            <Badge variant="outline" className="text-xs font-medium">7 Diagnostic Tools</Badge>
+            <Badge variant="outline" className="text-xs font-medium">7 Free Diagnostic Tools</Badge>
             <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
-              Everything you need to audit your AR
+              A complete AR audit — from DSO to ERP readiness
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
-              Each tool is purpose-built for companies in construction, distribution, and industrial sectors.
-              Complete all 7 in under 10 minutes for a full diagnostic report.
+              Each tool targets a specific collections metric. Run all 7 in under 10 minutes to get a full
+              picture of where your cash is stuck and what to fix first.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -229,7 +229,7 @@ export default function Landing() {
                   <p className="text-sm text-muted-foreground leading-relaxed">{tool.description}</p>
                 </div>
                 <div className="flex items-center text-xs font-medium text-primary gap-1 group-hover:gap-2 transition-all mt-auto">
-                  Start Free
+                  Run This Diagnostic
                   <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </div>
               </Card>
@@ -242,14 +242,14 @@ export default function Landing() {
       <section id="how-it-works" className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <div className="text-center space-y-3 mb-12">
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight">How it works</h2>
-            <p className="text-sm sm:text-base text-muted-foreground">Three steps to a complete AR diagnostic.</p>
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight">From signup to action plan in 10 minutes</h2>
+            <p className="text-sm sm:text-base text-muted-foreground">Three steps to a data-backed AR improvement roadmap.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {[
-              { step: "01", title: "Sign up free", desc: "Create your account in seconds with Google, Microsoft, or email. No credit card needed." },
-              { step: "02", title: "Run diagnostics", desc: "Answer targeted questions about your AR process. Each tool takes 2–5 minutes and surfaces real numbers." },
-              { step: "03", title: "Get your report", desc: "See your scores, benchmarks, and a prioritized action plan. Share with your team or book a demo to discuss." },
+              { step: "01", title: "Create your free account", desc: "Sign up in seconds with Google, Microsoft, or email. No credit card — no strings attached." },
+              { step: "02", title: "Run your diagnostics", desc: "Answer targeted questions about your AR process. Each of the 7 tools takes 2–5 minutes and produces real dollar figures." },
+              { step: "03", title: "Get your prioritized action plan", desc: "See scores, industry benchmarks, and exactly where to focus. Then review findings with a Payra AR specialist if you want help acting on them." },
             ].map((item) => (
               <div key={item.step} className="text-center space-y-3">
                 <div className="mx-auto h-12 w-12 rounded-full bg-primary/8 flex items-center justify-center">
@@ -268,10 +268,10 @@ export default function Landing() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center space-y-3 mb-12">
             <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
-              What you'll discover
+              Walk away knowing exactly where your cash is stuck
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
-              Walk away with concrete numbers and a clear picture of your AR health.
+              Every tool produces concrete numbers — not vague scores — so you can prioritize with confidence.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -295,11 +295,11 @@ export default function Landing() {
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Users className="h-5 w-5 text-primary" />
-            <span className="text-sm font-medium text-muted-foreground">Trusted by AR teams</span>
+            <span className="text-sm font-medium text-muted-foreground">From an AR leader who ran the audit</span>
           </div>
           <blockquote className="text-lg sm:text-xl font-medium text-foreground leading-relaxed italic">
-            "We ran the full audit in 8 minutes and found $340K in trapped cash we didn't know about.
-            The DSO benchmarks alone justified switching our process."
+            "We found $340K in trapped cash we didn't know about — in under 10 minutes.
+            The DSO benchmarks gave us the ammo to overhaul our collections process."
           </blockquote>
           <div className="text-sm text-muted-foreground">
             <span className="font-medium text-foreground">AR Director</span> · Mid-Market Distribution Company
@@ -312,15 +312,16 @@ export default function Landing() {
         <BlueprintGrid />
         <div className="max-w-3xl mx-auto text-center space-y-6 relative z-10">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
-            Ready to see what your AR is really costing you?
+            Your AR is either building cash flow or bleeding it. Find out which.
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
-            Run all 7 diagnostics for free — no commitment, no credit card, no sales pitch. Just clear data about your AR process.
+            Run all 7 diagnostics free — no commitment, no credit card, no sales call.
+            Just hard numbers about your DSO, trapped cash, and collections gaps.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Button asChild size="lg" className="w-full sm:w-auto gap-2 h-12 px-8 text-base">
               <Link href={signupPath} data-testid="link-bottom-cta">
-                Start Your Free Audit
+                Audit My AR — Free
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
@@ -331,7 +332,7 @@ export default function Landing() {
                 rel="noopener noreferrer"
               >
                 <Calendar className="h-4 w-4" />
-                Schedule a Demo
+                Review Findings with an Expert
               </a>
             </Button>
           </div>

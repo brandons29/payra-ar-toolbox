@@ -177,17 +177,17 @@ export default function CostCalculator() {
           {/* Inline CTA when excess cost is significant */}
           {calcs.excessCost > 10000 && (
             <InlineDemoCTA
-              message={`You're spending ${formatCurrency(calcs.excessCost)}/year more than best-in-class. See how Payra eliminates that gap in a quick demo.`}
+              message={`${formatCurrency(calcs.excessCost)}/year in excess AR costs vs. best-in-class. A 15-minute walkthrough shows exactly where automation eliminates that spend.`}
               utmContent="cost-excess"
             />
           )}
 
           <BridgeToPayra
-            heading="Cut Your AR Costs by 60-70%"
-            body={`Payra reduces cost-per-invoice by 60-70% through automation. At your volume of ${monthlyInvoices.toLocaleString()} invoices/month, that's approximately ${formatCurrency(calcs.payraSavings)} in annual savings — let us walk you through the ROI.`}
+            heading="Cut your cost-per-invoice by 60–70%"
+            body={`Payra automates cash application, dunning, and dispute resolution — reducing cost-per-invoice by 60–70%. At ${monthlyInvoices.toLocaleString()} invoices/month, that's approximately ${formatCurrency(calcs.payraSavings)} back in your budget annually.`}
             stat="60-70%"
             statLabel="Cost-per-invoice reduction"
-            ctaText="Schedule a Cost Review"
+            ctaText="See My Projected Savings"
             utmContent="cost-calculator"
           />
         </div>

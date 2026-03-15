@@ -132,15 +132,15 @@ export default function Login() {
   const headings: Record<AuthMode, { title: string; subtitle: string }> = {
     login: {
       title: "Welcome back",
-      subtitle: "Sign in to continue your AR audit",
+      subtitle: "Sign in to continue your AR diagnostic",
     },
     signup: {
-      title: "Create your account",
-      subtitle: "Start your free AR audit — no credit card required",
+      title: "Start your free AR audit",
+      subtitle: "7 diagnostic tools. Real dollar figures. No credit card required.",
     },
     forgot: {
       title: "Reset your password",
-      subtitle: "We'll send you a link to reset your password",
+      subtitle: "We'll send a reset link to your inbox",
     },
   };
 
@@ -153,18 +153,18 @@ export default function Login() {
         <div className="max-w-md space-y-8 relative z-10">
           <PayraLogoFull className="mb-8" />
           <h2 className="text-xl font-bold tracking-tight text-foreground">
-            Free AR diagnostic tools for your business
+            Find the cash stuck in your receivables
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            7 purpose-built tools for construction, distribution, and industrial companies.
-            Audit your AR process, benchmark against peers, and find where you're leaving cash on the table.
+            Built for AR leaders at construction, distribution, and industrial companies.
+            Benchmark your DSO, quantify trapped cash, and get a clear action plan — all free.
           </p>
           <div className="space-y-3 pt-4">
             {[
-              "Complete audit in under 10 minutes",
-              "Industry-specific benchmarks",
-              "Actionable recommendations",
-              "No credit card or commitment",
+              "Full audit in under 10 minutes",
+              "Construction, distribution & industrial benchmarks",
+              "Prioritized action plan with real dollar figures",
+              "No credit card — no sales pitch",
             ].map((item) => (
               <div key={item} className="flex items-center gap-2.5 text-sm text-muted-foreground">
                 <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
@@ -339,7 +339,7 @@ export default function Login() {
                 data-testid="button-email-submit"
               >
                 {submitting && <Loader2 className="h-4 w-4 mr-1.5 animate-spin" />}
-                {mode === "signup" ? "Create Account" : mode === "forgot" ? (resetSent ? "Link Sent" : "Send Reset Link") : "Sign In"}
+                {mode === "signup" ? "Start My Free Audit" : mode === "forgot" ? (resetSent ? "Link Sent" : "Send Reset Link") : "Sign In"}
               </Button>
             </form>
 
@@ -349,7 +349,7 @@ export default function Login() {
                 <p>
                   Don't have an account?{" "}
                   <button onClick={() => switchMode("signup")} className="text-primary font-medium hover:underline" data-testid="button-toggle-signup">
-                    Sign up free
+                    Create a free account
                   </button>
                 </p>
               )}
@@ -375,8 +375,11 @@ export default function Login() {
           {mode !== "forgot" && (
             <Card className="p-4 flex items-center gap-3 border-primary/10 bg-primary/[0.03]">
               <div className="flex-1">
-                <p className="text-sm text-muted-foreground">
-                  Want to see Payra in action first?
+                <p className="text-sm font-medium text-foreground/80">
+                  Prefer a guided walkthrough?
+                </p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  A Payra AR specialist can review your numbers with you.
                 </p>
               </div>
               <Button asChild variant="outline" size="sm" className="gap-1.5 shrink-0">
@@ -385,7 +388,7 @@ export default function Login() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Get Demo
+                  Talk to an Expert
                   <ExternalLink className="h-3 w-3 opacity-60" />
                 </a>
               </Button>

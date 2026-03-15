@@ -175,7 +175,7 @@ export default function DSOCalculator() {
           {/* Inline CTA after chart */}
           {calcs.freedCapital > 50000 && (
             <InlineDemoCTA
-              message={`At ${formatCurrency(calcs.freedCapital)} in potential freed capital, a 15-minute demo could show you the fastest path to get there.`}
+              message={`${formatCurrency(calcs.freedCapital)} in working capital waiting to be unlocked. A 15-minute walkthrough shows the fastest path to freeing it.`}
               utmContent="dso-freed-capital"
             />
           )}
@@ -196,11 +196,11 @@ export default function DSOCalculator() {
           </Card>
 
           <BridgeToPayra
-            heading="See How Payra Reduces DSO"
-            body={`Payra customers in ${industry.toLowerCase()} reduce DSO by an average of 38%. For your company, that would free approximately ${formatCurrency(revenue / 365 * currentDSO * 0.38)} in working capital.`}
+            heading="Reduce your DSO by up to 38%"
+            body={`Payra customers in ${industry.toLowerCase()} reduce DSO by an average of 38% with ERP-native automation. For your company, that means approximately ${formatCurrency(revenue / 365 * currentDSO * 0.38)} freed from receivables and back on your balance sheet.`}
             stat="38%"
             statLabel="Average DSO Reduction"
-            ctaText="Schedule Your DSO Review"
+            ctaText="See My DSO Improvement Plan"
             utmContent="dso-calculator"
           />
         </div>

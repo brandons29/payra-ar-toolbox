@@ -13,11 +13,11 @@ interface BridgeToPayraProps {
 }
 
 export function BridgeToPayra({
-  heading = "How Payra Helps",
+  heading = "How Payra fixes this",
   body,
   stat,
   statLabel,
-  ctaText = "Schedule a Demo",
+  ctaText = "See How Payra Fixes This",
   utmContent,
 }: BridgeToPayraProps) {
   const demoUrl = utmContent
@@ -78,7 +78,7 @@ export function InlineDemoCTA({ message, utmContent }: InlineDemoCTAProps) {
       <p className="flex-1 text-sm text-foreground/80 leading-relaxed">{message}</p>
       <Button asChild size="sm" variant="default" className="shrink-0 gap-1.5">
         <a href={demoUrl} target="_blank" rel="noopener noreferrer" data-testid="link-inline-demo">
-          Book Demo
+          Talk to an AR Expert
           <ExternalLink className="h-3 w-3 opacity-60" />
         </a>
       </Button>

@@ -28,13 +28,13 @@ export default function Dashboard() {
             )}
           </div>
           <p className="text-sm text-muted-foreground max-w-xl">
-            Run diagnostics on your accounts receivable process. Each tool takes 2–5 minutes and surfaces actionable insights.
+            Each tool takes 2–5 minutes and produces real dollar figures — trapped cash, excess cost, bad debt exposure — so you know exactly where to focus.
           </p>
         </div>
         {nextTool && completedCount < TOOLS.length && (
           <Button asChild size="sm" className="gap-1.5 shrink-0 self-start">
             <Link href={nextTool.path} data-testid="button-continue-audit">
-              {completedCount === 0 ? "Start Audit" : "Continue Audit"}
+              {completedCount === 0 ? "Start First Diagnostic" : "Continue to Next Tool"}
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </Button>
@@ -49,8 +49,8 @@ export default function Dashboard() {
               <h2 className="text-sm font-semibold">Your Progress</h2>
               <p className="text-xs text-muted-foreground">
                 {completedCount === TOOLS.length
-                  ? "All diagnostics complete — review your full report."
-                  : `${TOOLS.length - completedCount} remaining`
+                  ? "All 7 diagnostics complete — your full AR picture is ready."
+                  : `${TOOLS.length - completedCount} tools remaining — keep going for the full picture`
                 }
               </p>
             </div>
@@ -65,16 +65,16 @@ export default function Dashboard() {
             <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/10">
               <CircleCheck className="h-5 w-5 text-primary shrink-0" />
               <p className="text-sm flex-1">
-                All diagnostics complete.{" "}
+                All 7 diagnostics complete. Ready to act on what you found?{" "}
                 <a
                   href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=dashboard&utm_campaign=all-complete`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary font-medium hover:underline"
                 >
-                  Schedule a demo
+                  Review your results with a Payra AR specialist
                 </a>{" "}
-                to discuss improvements.
+                and get a custom improvement plan.
               </p>
             </div>
           )}
@@ -82,16 +82,16 @@ export default function Dashboard() {
             <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 border border-border/50">
               <TrendingUp className="h-4 w-4 text-primary shrink-0" />
               <p className="text-sm text-muted-foreground flex-1">
-                Seeing opportunities?{" "}
+                Already spotting trapped cash or collections gaps?{" "}
                 <a
                   href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=dashboard&utm_campaign=mid-progress`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary font-medium hover:underline"
                 >
-                  Book a demo
+                  Walk through your findings with an expert
                 </a>{" "}
-                to discuss your results.
+                — no obligation.
               </p>
             </div>
           )}
@@ -105,14 +105,14 @@ export default function Dashboard() {
             <BarChart3 className="h-6 w-6 text-primary" />
           </div>
           <div className="space-y-1.5">
-            <h2 className="font-semibold text-base">Start your first diagnostic</h2>
+            <h2 className="font-semibold text-base">Find out where your cash is stuck</h2>
             <p className="text-sm text-muted-foreground max-w-sm mx-auto">
-              Choose a tool below to begin. We recommend starting with the AR Health Scorecard for a broad overview.
+              Start with the AR Health Scorecard for a broad overview, then dive into DSO, aging, and collections specifics.
             </p>
           </div>
           <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
-            <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> ~20 min total</span>
-            <span className="flex items-center gap-1"><BarChart3 className="h-3 w-3" /> 7 tools</span>
+            <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> ~10 min for all 7</span>
+            <span className="flex items-center gap-1"><BarChart3 className="h-3 w-3" /> Real dollar figures</span>
           </div>
         </Card>
       )}
@@ -159,7 +159,7 @@ export default function Dashboard() {
 
                   {/* Action row */}
                   <div className="flex items-center text-xs font-medium text-primary group-hover:gap-2 gap-1 transition-all">
-                    {done ? "View Results" : "Get Started"}
+                    {done ? "View Results" : "Run This Tool"}
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                   </div>
                 </Card>
@@ -173,9 +173,9 @@ export default function Dashboard() {
       <Card className="p-6 bg-gradient-to-r from-primary/5 to-transparent border-primary/10 relative overflow-hidden">
         <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div className="flex-1 space-y-1">
-            <h2 className="text-sm font-semibold">Ready to improve these numbers?</h2>
+            <h2 className="text-sm font-semibold">Turn these findings into faster collections</h2>
             <p className="text-sm text-muted-foreground">
-              See how Payra's AR automation reduces DSO by 38% and saves 16+ hours/month.
+              Payra customers reduce DSO by 38% and reclaim 16+ hours/month with ERP-native AR automation. See how it works for your numbers.
             </p>
           </div>
           <Button asChild className="gap-2 shrink-0">
@@ -185,7 +185,7 @@ export default function Dashboard() {
               rel="noopener noreferrer"
             >
               <Sparkles className="h-3.5 w-3.5" />
-              Schedule a Demo
+              See Payra with My Numbers
               <ExternalLink className="h-3 w-3 opacity-60" />
             </a>
           </Button>

@@ -152,17 +152,17 @@ export default function TimelineMapper() {
         {/* Inline CTA when cycle is way over benchmark */}
         {totalDays > totalBenchmark * 1.5 && (
           <InlineDemoCTA
-            message={`Your cycle is ${Math.round(totalDays - totalBenchmark)} days longer than benchmark. A 15-minute walkthrough can show you where Payra cuts the most time.`}
+            message={`Your cycle runs ${Math.round(totalDays - totalBenchmark)} days longer than benchmark. Every extra day is cash sitting idle. See where Payra cuts the most time.`}
             utmContent="timeline-over-benchmark"
           />
         )}
 
         <BridgeToPayra
-          heading="Shorten Your Invoice-to-Cash Cycle"
-          body={`Payra eliminates the 3 biggest internal bottlenecks: cash application (0 days with auto-reconciliation), collections follow-up (automated same-day dunning), and customer disputes (self-service portal). That's ${calcs.internalDays} days you can remove from your cycle.`}
+          heading={`Cut ${calcs.internalDays} days from your collections cycle`}
+          body={`Payra eliminates the 3 biggest bottlenecks: cash application drops to 0 days with 99% auto-reconciliation, collections follow-up becomes automated same-day dunning, and disputes resolve faster through a self-service portal. That's ${calcs.internalDays} days of trapped cash returned to your balance sheet.`}
           stat={`${calcs.internalDays} days`}
           statLabel="of internal delay Payra can eliminate"
-          ctaText="Schedule a Cycle Review"
+          ctaText="See Where I Can Cut Days"
           utmContent="timeline-mapper"
         />
 

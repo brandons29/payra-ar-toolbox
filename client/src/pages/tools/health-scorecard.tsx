@@ -194,7 +194,7 @@ export default function HealthScorecard() {
         {/* Inline CTA when overall score is poor */}
         {overallScore < 60 && (
           <InlineDemoCTA
-            message={`A score of ${overallScore}/100 means major opportunities to improve. Schedule a demo to see exactly which areas Payra can transform.`}
+            message={`A score of ${overallScore}/100 means significant cash and efficiency are on the table. See exactly which areas Payra automates for companies like yours.`}
             utmContent="scorecard-low-score"
           />
         )}
@@ -215,7 +215,7 @@ export default function HealthScorecard() {
                 <BridgeToPayra
                   body={categories[i].payraFix}
                   stat={categories[i].payraStat}
-                  ctaText="See How Payra Fixes This"
+                  ctaText="See How Payra Automates This"
                   utmContent={`scorecard-${cat.name.toLowerCase().replace(/\s+/g, "-")}`}
                 />
               )}
@@ -225,11 +225,11 @@ export default function HealthScorecard() {
 
         {/* Bottom CTA */}
         <BridgeToPayra
-          heading="Get Your Personalized AR Improvement Plan"
-          body={`With a score of ${overallScore}/100, there are clear areas where automation can make a measurable difference. Let us walk you through a custom plan for your business.`}
+          heading="Get a custom improvement plan for your AR"
+          body={`With a score of ${overallScore}/100, there are clear opportunities to reduce DSO, cut costs, and eliminate manual work. A Payra specialist can walk you through exactly what changes would have the biggest impact.`}
           stat={`${overallScore}/100`}
           statLabel="Your AR Maturity Score"
-          ctaText="Schedule Your AR Review"
+          ctaText="Get My Custom AR Plan"
           utmContent="scorecard-overall"
         />
       </div>

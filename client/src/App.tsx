@@ -23,6 +23,10 @@ import CostCalculator from "@/pages/tools/cost-calculator";
 import ERPReadiness from "@/pages/tools/erp-readiness";
 import { useLocation } from "wouter";
 import { Loader2 } from "lucide-react";
+import { TOOLS } from "@/lib/constants";
+import { PayraLogo } from "@/components/PayraLogo";
+import { useResults } from "@/lib/store";
+import { Progress } from "@/components/ui/progress";
 
 /** Routes that require auth when Supabase is configured */
 function ProtectedRoute({ component: Component }: { component: React.ComponentType }) {
@@ -34,7 +38,7 @@ function ProtectedRoute({ component: Component }: { component: React.ComponentTy
   if (loading) {
     return (
       <div className="flex items-center justify-center h-full min-h-[50vh]">
-        <Loader2 className="h-6 w-6 animate-spin text-primary" />
+        <Loader2 className="h-5 w-5 animate-spin text-primary" />
       </div>
     );
   }
@@ -60,7 +64,7 @@ function RootRedirect() {
   if (loading && !timedOut) {
     return (
       <div className="flex items-center justify-center h-full min-h-screen">
-        <Loader2 className="h-6 w-6 animate-spin text-primary" />
+        <Loader2 className="h-5 w-5 animate-spin text-primary" />
       </div>
     );
   }
@@ -87,6 +91,38 @@ function AppRoutes() {
   );
 }
 
+/** Get current page title from route */
+function usePageTitle() {
+  const [location] = useLocation();
+  if (location === "/dashboard" || location === "/") return "Dashboard";
+  if (location === "/results") return "My Results";
+  const tool = TOOLS.find(t => t.path === location);
+  if (tool) return tool.name;
+  return "";
+}
+
+function TopBar() {
+  const title = usePageTitle();
+  const { completedCount } = useResults();
+  const progress = (completedCount / TOOLS.length) * 100;
+
+  return (
+    <header className="flex items-center gap-3 px-4 h-14 border-b bg-card/50 backdrop-blur-sm shrink-0 sticky top-0 z-30">
+      <SidebarTrigger data-testid="button-sidebar-toggle" className="text-muted-foreground hover:text-foreground transition-colors" />
+      <div className="h-5 w-px bg-border" />
+      <h1 className="text-sm font-semibold text-foreground truncate" data-testid="text-page-title">{title}</h1>
+      <div className="flex-1" />
+      {/* Mini progress indicator */}
+      <div className="hidden sm:flex items-center gap-2">
+        <span className="text-xs text-muted-foreground">{completedCount}/{TOOLS.length}</span>
+        <div className="w-20">
+          <Progress value={progress} className="h-1.5" />
+        </div>
+      </div>
+    </header>
+  );
+}
+
 function AppLayout() {
   const [location] = useLocation();
   const isLogin = location === "/login";
@@ -106,11 +142,11 @@ function AppLayout() {
       <div className="flex h-screen w-full">
         <AppSidebar />
         <div className="flex flex-col flex-1 min-w-0">
-          <header className="flex items-center gap-2 p-2 border-b shrink-0">
-            <SidebarTrigger data-testid="button-sidebar-toggle" />
-          </header>
+          <TopBar />
           <main className="flex-1 overflow-y-auto">
-            <AppRoutes />
+            <div className="page-enter">
+              <AppRoutes />
+            </div>
           </main>
         </div>
       </div>

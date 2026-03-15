@@ -8,6 +8,7 @@ import { BridgeToPayra, InlineDemoCTA } from "@/components/BridgeToPayra";
 import { useResults } from "@/lib/store";
 import { INDUSTRY_BENCHMARKS, type Industry, formatCurrency } from "@/lib/constants";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from "recharts";
+import { Check, ArrowDown, ArrowUp } from "lucide-react";
 
 export default function DSOCalculator() {
   const { save } = useResults();
@@ -61,19 +62,19 @@ export default function DSOCalculator() {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto space-y-6" data-testid="page-dso">
-      <div className="space-y-1">
-        <h1 className="text-xl font-bold">DSO Calculator</h1>
-        <p className="text-sm text-muted-foreground">
+    <div className="page-container space-y-6" data-testid="page-dso">
+      <div className="space-y-1.5">
+        <h1 className="text-xl font-bold tracking-tight">DSO Calculator</h1>
+        <p className="text-sm text-muted-foreground max-w-xl">
           Calculate how much working capital you could unlock by reducing Days Sales Outstanding.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Inputs */}
-        <Card className="lg:col-span-2 p-5 space-y-5">
-          <h2 className="font-semibold text-sm">Your Numbers</h2>
-          <div className="space-y-1">
+        <Card className="lg:col-span-2 p-6 space-y-5 self-start lg:sticky lg:top-20">
+          <h2 className="text-sm font-semibold">Your Numbers</h2>
+          <div className="space-y-1.5">
             <label className="text-sm font-medium">Industry</label>
             <Select value={industry} onValueChange={(v) => setIndustry(v as Industry)}>
               <SelectTrigger data-testid="select-industry"><SelectValue /></SelectTrigger>
@@ -88,50 +89,58 @@ export default function DSOCalculator() {
           <SliderInput label="Current DSO" value={currentDSO} onChange={(v) => { setCurrentDSO(v); if (targetDSO >= v) setTargetDSO(v - 1); }} min={15} max={120} suffix="days" testId="slider-current-dso" />
           <SliderInput label="Target DSO" value={targetDSO} onChange={setTargetDSO} min={10} max={Math.max(11, currentDSO - 1)} suffix="days" testId="slider-target-dso" />
           <SliderInput label="Cost of Capital" value={costOfCapital} onChange={setCostOfCapital} min={1} max={20} suffix="%" testId="slider-cost-capital" />
-          <Button onClick={handleSave} className="w-full" size="sm">
-            {saved ? "Saved" : "Save Results"}
+          <Button onClick={handleSave} className="w-full gap-2" size="sm">
+            {saved ? <><Check className="h-3.5 w-3.5" /> Saved</> : "Save Results"}
           </Button>
         </Card>
 
         {/* Results */}
-        <div className="lg:col-span-3 space-y-4">
-          {/* Hero Metrics */}
-          <Card className="p-5 space-y-3">
-            <div className="space-y-1">
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Freed Working Capital</p>
-              <p className="text-xl font-bold text-primary" data-testid="text-freed-capital">
+        <div className="lg:col-span-3 space-y-5">
+          {/* Hero metrics — two-column stat cards */}
+          <div className="grid grid-cols-2 gap-4">
+            <Card className="p-5 space-y-1.5">
+              <p className="metric-label">Freed Working Capital</p>
+              <p className="text-xl font-bold text-primary tracking-tight" data-testid="text-freed-capital">
                 {formatCurrency(calcs.freedCapital)}
               </p>
-            </div>
-            <div className="space-y-1">
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Annual Borrowing Savings</p>
-              <p className="text-lg font-bold" data-testid="text-annual-savings">
-                {formatCurrency(calcs.annualSavings)}/yr
+            </Card>
+            <Card className="p-5 space-y-1.5">
+              <p className="metric-label">Annual Savings</p>
+              <p className="text-xl font-bold tracking-tight" data-testid="text-annual-savings">
+                {formatCurrency(calcs.annualSavings)}<span className="text-sm font-normal text-muted-foreground">/yr</span>
               </p>
-            </div>
-            <Badge variant={calcs.dsoVsMedian > 0 ? "destructive" : "default"}>
-              Your DSO of {currentDSO} days is {Math.abs(calcs.dsoVsMedian)} days {calcs.dsoVsMedian > 0 ? "above" : "below"} the {industry} median
+            </Card>
+          </div>
+
+          {/* DSO benchmark badge */}
+          <div className="flex items-center gap-2">
+            <Badge
+              variant={calcs.dsoVsMedian > 0 ? "destructive" : "default"}
+              className="gap-1"
+            >
+              {calcs.dsoVsMedian > 0 ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />}
+              {Math.abs(calcs.dsoVsMedian)} days {calcs.dsoVsMedian > 0 ? "above" : "below"} {industry} median ({benchmarks.medianDSO}d)
             </Badge>
-          </Card>
+          </div>
 
           {/* Scenario Table */}
           <Card className="p-5">
-            <h3 className="font-semibold text-sm mb-3">Reduction Scenarios</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+            <h3 className="text-sm font-semibold mb-4">Reduction Scenarios</h3>
+            <div className="overflow-x-auto -mx-1">
+              <table className="w-full text-sm" data-testid="table-scenarios">
                 <thead>
-                  <tr className="border-b text-left">
-                    <th className="pb-2 font-medium text-muted-foreground">Reduction</th>
-                    <th className="pb-2 font-medium text-muted-foreground">Freed Capital</th>
-                    <th className="pb-2 font-medium text-muted-foreground">Annual Savings</th>
+                  <tr className="border-b">
+                    <th className="pb-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">Reduction</th>
+                    <th className="pb-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">Freed Capital</th>
+                    <th className="pb-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">Annual Savings</th>
                   </tr>
                 </thead>
                 <tbody>
                   {calcs.scenarios.map((s) => (
                     <tr key={s.reduction} className="border-b last:border-0">
-                      <td className="py-2">{s.reduction} days</td>
-                      <td className="py-2 font-medium">{formatCurrency(s.freedCapital)}</td>
-                      <td className="py-2 font-medium">{formatCurrency(s.annualSavings)}</td>
+                      <td className="py-3 text-muted-foreground">{s.reduction} days</td>
+                      <td className="py-3 font-semibold">{formatCurrency(s.freedCapital)}</td>
+                      <td className="py-3 font-semibold">{formatCurrency(s.annualSavings)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -141,13 +150,23 @@ export default function DSOCalculator() {
 
           {/* Chart */}
           <Card className="p-5">
-            <h3 className="font-semibold text-sm mb-3">12-Month Savings Projection</h3>
+            <h3 className="text-sm font-semibold mb-4">12-Month Savings Projection</h3>
             <ResponsiveContainer width="100%" height={220}>
               <LineChart data={calcs.monthlyData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis dataKey="month" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
                 <YAxis tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
-                <Tooltip formatter={(v: number) => formatCurrency(v)} labelFormatter={(l) => `Month ${String(l).replace("M", "")}`} />
+                <Tooltip
+                  formatter={(v: number) => formatCurrency(v)}
+                  labelFormatter={(l) => `Month ${String(l).replace("M", "")}`}
+                  contentStyle={{
+                    backgroundColor: "hsl(var(--card))",
+                    border: "1px solid hsl(var(--border))",
+                    borderRadius: "8px",
+                    fontSize: "12px",
+                    boxShadow: "var(--shadow-md)",
+                  }}
+                />
                 <Line type="monotone" dataKey="savings" stroke="hsl(var(--primary))" strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
@@ -163,22 +182,22 @@ export default function DSOCalculator() {
 
           {/* Benchmarks */}
           <Card className="p-5">
-            <h3 className="font-semibold text-sm mb-2">Industry Benchmarks — {industry}</h3>
-            <div className="grid grid-cols-2 gap-3 text-sm">
-              <div>
-                <p className="text-muted-foreground">Median DSO</p>
-                <p className="font-bold">{benchmarks.medianDSO} days</p>
+            <h3 className="text-sm font-semibold mb-3">{industry} Benchmarks</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-0.5">
+                <p className="metric-label">Median DSO</p>
+                <p className="text-lg font-bold">{benchmarks.medianDSO} <span className="text-sm font-normal text-muted-foreground">days</span></p>
               </div>
-              <div>
-                <p className="text-muted-foreground">Top Quartile DSO</p>
-                <p className="font-bold">{benchmarks.topQuartileDSO} days</p>
+              <div className="space-y-0.5">
+                <p className="metric-label">Top Quartile</p>
+                <p className="text-lg font-bold">{benchmarks.topQuartileDSO} <span className="text-sm font-normal text-muted-foreground">days</span></p>
               </div>
             </div>
           </Card>
 
           <BridgeToPayra
             heading="See How Payra Reduces DSO"
-            body={`Payra customers in ${industry.toLowerCase()} reduce DSO by an average of 38%. For your company, that would free approximately ${formatCurrency(revenue / 365 * currentDSO * 0.38)} in working capital — let us show you how.`}
+            body={`Payra customers in ${industry.toLowerCase()} reduce DSO by an average of 38%. For your company, that would free approximately ${formatCurrency(revenue / 365 * currentDSO * 0.38)} in working capital.`}
             stat="38%"
             statLabel="Average DSO Reduction"
             ctaText="Schedule Your DSO Review"

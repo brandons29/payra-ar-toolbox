@@ -83,9 +83,9 @@ export default function AgingAnalyzer() {
   };
 
   return (
-    <div className="page-container space-y-6" data-testid="page-aging">
+    <div className="p-6 max-w-4xl mx-auto space-y-6" data-testid="page-aging">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold tracking-tight">AR Aging Analyzer</h1>
+        <h1 className="text-xl font-bold">AR Aging Analyzer</h1>
         <p className="text-sm text-muted-foreground">
           Assess bad debt exposure and collection risk across your receivables portfolio.
         </p>
@@ -93,7 +93,7 @@ export default function AgingAnalyzer() {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Inputs */}
-        <Card className="lg:col-span-2 p-6 space-y-5 self-start lg:sticky lg:top-20">
+        <Card className="lg:col-span-2 p-5 space-y-4">
           <h2 className="font-semibold text-sm">Enter AR Balances</h2>
           <div className="space-y-1">
             <Label className="text-sm">Industry</Label>
@@ -127,7 +127,7 @@ export default function AgingAnalyzer() {
           <Card className="p-5 space-y-3">
             <div className="flex items-center justify-between gap-2">
               <div>
-                <p className="metric-label">Bad Debt Exposure</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wide">Bad Debt Exposure</p>
                 <p className="text-xl font-bold text-primary">{formatCurrency(calcs.totalExposure)}</p>
               </div>
               <Badge variant={calcs.riskRating === "Low" ? "default" : "destructive"} className="text-sm">
@@ -149,7 +149,7 @@ export default function AgingAnalyzer() {
 
           {/* Chart */}
           <Card className="p-5">
-            <h3 className="text-sm font-semibold mb-4">Aging Distribution</h3>
+            <h3 className="font-semibold text-sm mb-3">Aging Distribution</h3>
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={calcs.chartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -167,15 +167,15 @@ export default function AgingAnalyzer() {
 
           {/* Priority Matrix */}
           <Card className="p-5">
-            <h3 className="text-sm font-semibold mb-4">Collections Priority</h3>
+            <h3 className="font-semibold text-sm mb-3">Collections Priority</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b text-left">
-                    <th className="pb-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">Bucket</th>
-                    <th className="pb-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">Amount</th>
-                    <th className="pb-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">Risk %</th>
-                    <th className="pb-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">Exposure</th>
+                    <th className="pb-2 font-medium text-muted-foreground">Bucket</th>
+                    <th className="pb-2 font-medium text-muted-foreground">Amount</th>
+                    <th className="pb-2 font-medium text-muted-foreground">Risk %</th>
+                    <th className="pb-2 font-medium text-muted-foreground">Exposure</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -194,7 +194,7 @@ export default function AgingAnalyzer() {
 
           {/* Recovery */}
           <Card className="p-5">
-            <h3 className="text-sm font-semibold mb-3">Recovery Scenarios</h3>
+            <h3 className="font-semibold text-sm mb-2">Recovery Scenarios</h3>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
                 <p className="text-muted-foreground">Aggressive (65%)</p>
@@ -210,17 +210,17 @@ export default function AgingAnalyzer() {
           {/* Inline CTA if high risk */}
           {(calcs.riskRating === "High" || calcs.riskRating === "Critical") && (
             <InlineDemoCTA
-              message={`${formatCurrency(calcs.totalExposure)} at risk of write-off. See how Payra's automated collections recover overdue cash before it hits your P&L.`}
+              message={`With ${formatCurrency(calcs.totalExposure)} at risk, see how Payra recovers overdue receivables before they become write-offs.`}
               utmContent="aging-high-risk"
             />
           )}
 
           <BridgeToPayra
-            heading="Recover overdue cash before it becomes bad debt"
-            body={`Payra's automated collection sequences reduce 60+ day balances by 75% within 90 days. For your portfolio, that could recover up to ${formatCurrency(calcs.aggressiveRecovery)} in overdue receivables — without adding headcount.`}
+            heading="Recover Overdue Cash Faster"
+            body={`Payra's automated collection sequences reduce the 60+ day bucket by 75% within 90 days. That could recover up to ${formatCurrency(calcs.aggressiveRecovery)} of your overdue receivables.`}
             stat="75%"
             statLabel="Reduction in 60+ day receivables"
-            ctaText="Show Me the Recovery Plan"
+            ctaText="Schedule a Collections Review"
             utmContent="aging-analyzer"
           />
         </div>

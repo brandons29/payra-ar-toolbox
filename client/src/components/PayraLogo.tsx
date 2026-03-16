@@ -52,16 +52,12 @@ export function PayraLogoFull({ className = "" }: { className?: string }) {
  */
 export function PayraLogo({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex items-center gap-2.5 ${className}`} data-testid="logo-payra">
+    <div className={`flex items-center gap-2 ${className}`} data-testid="logo-payra">
       <PayraIconMark size={26} />
-      <div className="flex items-baseline gap-1.5">
-        <span className="font-bold text-[15px] tracking-tight text-foreground">
-          PAYRA
-        </span>
-        <span className="text-xs text-muted-foreground font-medium tracking-wide">
-          AR Toolbox
-        </span>
-      </div>
+      <span className="font-semibold text-base tracking-tight">
+        <span style={{ color: "#022947" }} className="dark:text-white">PAYRA</span>
+        <span className="text-muted-foreground font-normal ml-1.5">AR Toolbox</span>
+      </span>
     </div>
   );
 }

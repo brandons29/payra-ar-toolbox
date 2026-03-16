@@ -69,9 +69,9 @@ export default function CEICalculator() {
   const gaugeAngle = (calcs.cei / 100) * 180 - 90; // -90 to 90 degrees
 
   return (
-    <div className="page-container space-y-6" data-testid="page-cei">
+    <div className="p-6 max-w-4xl mx-auto space-y-6" data-testid="page-cei">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold tracking-tight">CEI Calculator</h1>
+        <h1 className="text-xl font-bold">CEI Calculator</h1>
         <p className="text-sm text-muted-foreground">
           Measure your Collection Effectiveness Index — the percentage of receivables collected in a given period.
         </p>
@@ -79,7 +79,7 @@ export default function CEICalculator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Inputs */}
-        <Card className="lg:col-span-2 p-6 space-y-5 self-start lg:sticky lg:top-20">
+        <Card className="lg:col-span-2 p-5 space-y-4">
           <h2 className="font-semibold text-sm">Period Data</h2>
           {[
             { label: "Beginning AR Balance", value: beginningAR, setter: setBeginningAR, id: "beginning-ar" },
@@ -179,17 +179,17 @@ export default function CEICalculator() {
           {/* Inline CTA when below top quartile */}
           {calcs.cei < 90 && (
             <InlineDemoCTA
-              message={`A ${formatPercent(90 - calcs.cei)} gap to top-quartile CEI = ${formatCurrency((90 - calcs.cei) * calcs.dollarPerPoint)} in uncollected cash each period. Let us show you the fastest way to close it.`}
+              message={`Closing a ${formatPercent(90 - calcs.cei)} gap to top-quartile CEI means collecting ${formatCurrency((90 - calcs.cei) * calcs.dollarPerPoint)} more per period. Let's show you how.`}
               utmContent="cei-below-90"
             />
           )}
 
           <BridgeToPayra
-            heading="Push your CEI above 90% — automatically"
-            body={`Payra's automated follow-ups and self-service payment portal make it effortless for customers to pay on time. That means collecting ${formatCurrency((90 - Math.min(calcs.cei, 89)) * calcs.dollarPerPoint)} more per period — without chasing.`}
+            heading="Push Your CEI Above 90%"
+            body={`Payra's automated follow-up and customer portal push CEI above 90% by making it effortless for customers to pay. That means collecting ${formatCurrency((90 - Math.min(calcs.cei, 89)) * calcs.dollarPerPoint)} more per period.`}
             stat=">90%"
             statLabel="Average CEI with Payra"
-            ctaText="See How to Close the Gap"
+            ctaText="Schedule a CEI Review"
             utmContent="cei-calculator"
           />
         </div>

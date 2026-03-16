@@ -65,9 +65,9 @@ export default function CostCalculator() {
   };
 
   return (
-    <div className="page-container space-y-6" data-testid="page-cost">
+    <div className="p-6 max-w-4xl mx-auto space-y-6" data-testid="page-cost">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold tracking-tight">AR Cost Calculator</h1>
+        <h1 className="text-xl font-bold">AR Cost Calculator</h1>
         <p className="text-sm text-muted-foreground">
           Calculate the true total cost of your accounts receivable process.
         </p>
@@ -75,7 +75,7 @@ export default function CostCalculator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Inputs */}
-        <Card className="lg:col-span-2 p-6 space-y-5 self-start lg:sticky lg:top-20">
+        <Card className="lg:col-span-2 p-5 space-y-4">
           <h2 className="font-semibold text-sm">Your AR Operation</h2>
           <SliderInput label="Number of AR Staff" value={arStaff} onChange={setArStaff} min={1} max={20} testId="slider-ar-staff" />
           <SliderInput label="Average AR Salary" value={avgSalary} onChange={setAvgSalary} min={30_000} max={100_000} step={5_000} prefix="$" testId="slider-salary" />
@@ -102,13 +102,13 @@ export default function CostCalculator() {
           <Card className="p-5 space-y-3">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="metric-label">Cost Per Invoice</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wide">Cost Per Invoice</p>
                 <p className="text-xl font-bold text-primary">{formatCurrency(calcs.costPerInvoice)}</p>
                 <p className="text-xs text-muted-foreground">Best-in-class: {formatCurrency(calcs.benchmarkCPI)}</p>
               </div>
               <div>
-                <p className="metric-label">Total Annual AR Cost</p>
-                <p className="text-xl font-bold tracking-tight">{formatCurrency(calcs.totalCost)}</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wide">Total Annual AR Cost</p>
+                <p className="text-xl font-bold">{formatCurrency(calcs.totalCost)}</p>
               </div>
             </div>
             {calcs.excessCost > 0 && (
@@ -120,7 +120,7 @@ export default function CostCalculator() {
 
           {/* Donut Chart */}
           <Card className="p-5">
-            <h3 className="text-sm font-semibold mb-4">Cost Breakdown</h3>
+            <h3 className="font-semibold text-sm mb-3">Cost Breakdown</h3>
             <ResponsiveContainer width="100%" height={240}>
               <PieChart>
                 <Pie
@@ -144,12 +144,12 @@ export default function CostCalculator() {
 
           {/* Breakdown Table */}
           <Card className="p-5">
-            <h3 className="text-sm font-semibold mb-4">Detailed Breakdown</h3>
+            <h3 className="font-semibold text-sm mb-3">Detailed Breakdown</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b text-left">
-                    <th className="pb-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">Component</th>
+                    <th className="pb-2 font-medium text-muted-foreground">Component</th>
                     <th className="pb-2 font-medium text-muted-foreground text-right">Amount</th>
                     <th className="pb-2 font-medium text-muted-foreground text-right">% of Total</th>
                   </tr>
@@ -177,17 +177,17 @@ export default function CostCalculator() {
           {/* Inline CTA when excess cost is significant */}
           {calcs.excessCost > 10000 && (
             <InlineDemoCTA
-              message={`${formatCurrency(calcs.excessCost)}/year in excess AR costs vs. best-in-class. A 15-minute walkthrough shows exactly where automation eliminates that spend.`}
+              message={`You're spending ${formatCurrency(calcs.excessCost)}/year more than best-in-class. See how Payra eliminates that gap in a quick demo.`}
               utmContent="cost-excess"
             />
           )}
 
           <BridgeToPayra
-            heading="Cut your cost-per-invoice by 60–70%"
-            body={`Payra automates cash application, dunning, and dispute resolution — reducing cost-per-invoice by 60–70%. At ${monthlyInvoices.toLocaleString()} invoices/month, that's approximately ${formatCurrency(calcs.payraSavings)} back in your budget annually.`}
+            heading="Cut Your AR Costs by 60-70%"
+            body={`Payra reduces cost-per-invoice by 60-70% through automation. At your volume of ${monthlyInvoices.toLocaleString()} invoices/month, that's approximately ${formatCurrency(calcs.payraSavings)} in annual savings — let us walk you through the ROI.`}
             stat="60-70%"
             statLabel="Cost-per-invoice reduction"
-            ctaText="See My Projected Savings"
+            ctaText="Schedule a Cost Review"
             utmContent="cost-calculator"
           />
         </div>

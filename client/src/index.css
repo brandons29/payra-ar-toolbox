@@ -2,12 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* PAYRA AR TOOLBOX — Refined Brand Palette
- * Primary green: #2F7D5E → HSL 153 45% 34%
- * Cyan accent: #2CC5E7 → used in logo
- * Dark navy: #022947 → brand dark
- * Surface system: layered neutrals with green undertone
- */
+/* PAYRA AR TOOLBOX — Brand Palette */
+/* Primary: #2F7D5E → HSL 153 45% 34% */
+/* Dark text: #1A2B3C → HSL 210 38% 17% */
+/* Light bg: #F7FAF8 → HSL 150 23% 97% */
 
 /* LIGHT MODE */
 :root {
@@ -16,72 +14,59 @@
   --opaque-button-border-intensity: -8;
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
-
-  /* Refined surface system with subtle green-warm undertone */
-  --background: 150 10% 97.5%;
-  --foreground: 210 38% 15%;
-  --border: 150 6% 90%;
+  --background: 150 23% 97%;
+  --foreground: 210 38% 17%;
+  --border: 150 8% 89%;
   --card: 0 0% 100%;
-  --card-foreground: 210 38% 15%;
-  --card-border: 150 6% 92%;
-
-  /* Sidebar — slightly richer */
-  --sidebar: 160 12% 96%;
-  --sidebar-foreground: 210 38% 15%;
+  --card-foreground: 210 38% 17%;
+  --card-border: 150 8% 92%;
+  --sidebar: 150 15% 95%;
+  --sidebar-foreground: 210 38% 17%;
   --sidebar-border: 150 8% 89%;
   --sidebar-primary: 153 45% 34%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 153 12% 93%;
-  --sidebar-accent-foreground: 210 38% 15%;
+  --sidebar-accent: 150 12% 90%;
+  --sidebar-accent-foreground: 210 38% 17%;
   --sidebar-ring: 153 45% 34%;
-
   --popover: 0 0% 100%;
-  --popover-foreground: 210 38% 15%;
-  --popover-border: 150 6% 90%;
-
+  --popover-foreground: 210 38% 17%;
+  --popover-border: 150 8% 89%;
   --primary: 153 45% 34%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 150 8% 94%;
-  --secondary-foreground: 210 38% 15%;
-  --muted: 150 6% 94%;
-  --muted-foreground: 210 8% 45%;
-  --accent: 153 10% 94%;
-  --accent-foreground: 210 38% 15%;
+  --secondary: 150 10% 93%;
+  --secondary-foreground: 210 38% 17%;
+  --muted: 150 8% 93%;
+  --muted-foreground: 210 10% 46%;
+  --accent: 150 14% 92%;
+  --accent-foreground: 210 38% 17%;
   --destructive: 0 84% 42%;
   --destructive-foreground: 0 0% 98%;
-  --input: 150 6% 82%;
+  --input: 150 8% 78%;
   --ring: 153 45% 34%;
-
-  /* Charts — refined complementary palette */
   --chart-1: 153 45% 34%;
-  --chart-2: 183 55% 40%;
-  --chart-3: 38 76% 50%;
-  --chart-4: 210 55% 48%;
-  --chart-5: 15 75% 55%;
-
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --chart-2: 153 45% 45%;
+  --chart-3: 40 74% 50%;
+  --chart-4: 200 60% 45%;
+  --chart-5: 15 80% 55%;
+  --font-sans: Inter, system-ui, sans-serif;
   --font-serif: Georgia, serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
-  --radius: .625rem;
-
-  /* Refined shadow system — more depth, less spread */
-  --shadow-2xs: 0 1px 2px rgba(0,0,0,.03);
-  --shadow-xs: 0 1px 2px rgba(0,0,0,.04), 0 1px 3px rgba(0,0,0,.03);
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.03);
-  --shadow: 0 2px 4px rgba(0,0,0,.04), 0 4px 8px rgba(0,0,0,.03);
-  --shadow-md: 0 4px 8px rgba(0,0,0,.04), 0 8px 16px rgba(0,0,0,.03);
-  --shadow-lg: 0 8px 16px rgba(0,0,0,.05), 0 16px 32px rgba(0,0,0,.04);
-  --shadow-xl: 0 16px 32px rgba(0,0,0,.06), 0 24px 48px rgba(0,0,0,.04);
-  --shadow-2xl: 0 24px 48px rgba(0,0,0,.08);
-
+  --font-mono: Menlo, monospace;
+  --radius: .5rem;
+  --shadow-2xs: 0 1px 2px rgba(0,0,0,.04);
+  --shadow-xs: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow: 0 2px 6px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.08), 0 4px 8px rgba(0,0,0,.04);
+  --shadow-xl: 0 16px 48px rgba(0,0,0,.10), 0 8px 16px rgba(0,0,0,.05);
+  --shadow-2xl: 0 24px 64px rgba(0,0,0,.12);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 
-  /* Payra brand tokens */
+  /* Payra-specific custom colors */
   --payra-green: 153 45% 34%;
-  --payra-cyan: 193 78% 54%;
-  --payra-light-green: 153 30% 95%;
-  --payra-dark: 210 38% 15%;
+  --payra-light-green: 150 40% 93%;
+  --payra-dark: 210 38% 17%;
 
   /* Fallback for older browsers */
   --sidebar-primary-border: hsl(var(--sidebar-primary));
@@ -106,59 +91,51 @@
   --opaque-button-border-intensity: 9;
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
-
-  /* Deep navy foundation — more depth than generic dark */
-  --background: 210 20% 7%;
+  --background: 200 15% 8%;
   --foreground: 150 5% 93%;
-  --border: 210 12% 16%;
-  --card: 210 16% 10%;
+  --border: 200 8% 18%;
+  --card: 200 12% 11%;
   --card-foreground: 150 5% 93%;
-  --card-border: 210 10% 15%;
-
-  --sidebar: 210 18% 9%;
+  --card-border: 200 8% 16%;
+  --sidebar: 200 12% 10%;
   --sidebar-foreground: 150 5% 93%;
-  --sidebar-border: 210 10% 15%;
-  --sidebar-primary: 153 38% 46%;
+  --sidebar-border: 200 8% 16%;
+  --sidebar-primary: 153 40% 44%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 210 10% 16%;
+  --sidebar-accent: 200 8% 18%;
   --sidebar-accent-foreground: 150 5% 93%;
-  --sidebar-ring: 153 38% 46%;
-
-  --popover: 210 16% 11%;
+  --sidebar-ring: 153 40% 44%;
+  --popover: 200 12% 12%;
   --popover-foreground: 150 5% 93%;
-  --popover-border: 210 10% 16%;
-
-  --primary: 153 38% 46%;
+  --popover-border: 200 8% 18%;
+  --primary: 153 40% 44%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 210 10% 16%;
+  --secondary: 200 8% 18%;
   --secondary-foreground: 150 5% 93%;
-  --muted: 210 8% 18%;
-  --muted-foreground: 150 5% 58%;
-  --accent: 210 10% 16%;
+  --muted: 200 6% 20%;
+  --muted-foreground: 150 5% 60%;
+  --accent: 200 8% 18%;
   --accent-foreground: 150 5% 93%;
   --destructive: 0 70% 50%;
   --destructive-foreground: 0 0% 98%;
-  --input: 210 10% 24%;
-  --ring: 153 38% 46%;
+  --input: 200 8% 28%;
+  --ring: 153 40% 44%;
+  --chart-1: 153 40% 50%;
+  --chart-2: 153 35% 60%;
+  --chart-3: 40 65% 60%;
+  --chart-4: 200 50% 58%;
+  --chart-5: 15 70% 60%;
+  --shadow-2xs: 0 1px 2px rgba(0,0,0,.2);
+  --shadow-xs: 0 1px 3px rgba(0,0,0,.25);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.2);
+  --shadow: 0 2px 6px rgba(0,0,0,.3), 0 1px 3px rgba(0,0,0,.2);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.35), 0 2px 4px rgba(0,0,0,.2);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.4), 0 4px 8px rgba(0,0,0,.2);
+  --shadow-xl: 0 16px 48px rgba(0,0,0,.45), 0 8px 16px rgba(0,0,0,.2);
+  --shadow-2xl: 0 24px 64px rgba(0,0,0,.5);
 
-  --chart-1: 153 38% 52%;
-  --chart-2: 183 45% 55%;
-  --chart-3: 38 65% 58%;
-  --chart-4: 210 45% 58%;
-  --chart-5: 15 65% 58%;
-
-  --shadow-2xs: 0 1px 2px rgba(0,0,0,.25);
-  --shadow-xs: 0 1px 3px rgba(0,0,0,.3);
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.35), 0 1px 2px rgba(0,0,0,.25);
-  --shadow: 0 2px 6px rgba(0,0,0,.35), 0 1px 3px rgba(0,0,0,.25);
-  --shadow-md: 0 4px 12px rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.25);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,.45), 0 4px 8px rgba(0,0,0,.25);
-  --shadow-xl: 0 16px 48px rgba(0,0,0,.5), 0 8px 16px rgba(0,0,0,.25);
-  --shadow-2xl: 0 24px 64px rgba(0,0,0,.55);
-
-  --payra-green: 153 38% 46%;
-  --payra-cyan: 193 65% 50%;
-  --payra-light-green: 153 15% 14%;
+  --payra-green: 153 40% 44%;
+  --payra-light-green: 153 20% 16%;
   --payra-dark: 150 5% 93%;
 
   --sidebar-primary-border: hsl(var(--sidebar-primary));
@@ -182,90 +159,8 @@
     @apply border-border;
   }
 
-  html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
   body {
     @apply font-sans antialiased bg-background text-foreground;
-    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-  }
-
-  /* Better focus rings */
-  :focus-visible {
-    @apply outline-none ring-2 ring-primary/40 ring-offset-2 ring-offset-background;
-  }
-}
-
-@layer components {
-  /* Payra card system — Untitled UI inspired */
-  .payra-card {
-    @apply bg-card rounded-xl border border-card-border;
-    box-shadow: var(--shadow-xs);
-    transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-  }
-  .payra-card:hover {
-    box-shadow: var(--shadow-md);
-    border-color: hsl(var(--border));
-  }
-  .payra-card-interactive {
-    @apply payra-card cursor-pointer;
-  }
-  .payra-card-interactive:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-1px);
-  }
-  .payra-card-interactive:active {
-    transform: translateY(0);
-    box-shadow: var(--shadow-sm);
-  }
-
-  /* Section headers — consistent Untitled UI style */
-  .section-title {
-    @apply text-sm font-semibold text-foreground tracking-tight;
-  }
-  .section-subtitle {
-    @apply text-sm text-muted-foreground leading-relaxed;
-  }
-
-  /* Metric display — bold hero numbers */
-  .metric-value {
-    @apply text-2xl font-bold tracking-tight text-foreground;
-  }
-  .metric-label {
-    @apply text-xs font-medium text-muted-foreground uppercase tracking-wider;
-  }
-
-  /* Feature badge — for tool cards */
-  .feature-badge {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium;
-    @apply bg-primary/8 text-primary border border-primary/10;
-  }
-
-  /* Page container */
-  .page-container {
-    @apply px-6 py-8 max-w-5xl mx-auto;
-  }
-  @media (min-width: 1280px) {
-    .page-container {
-      @apply px-8;
-    }
-  }
-
-  /* Stat card */
-  .stat-card {
-    @apply payra-card p-5;
-  }
-
-  /* Smooth page transitions */
-  .page-enter {
-    animation: pageEnter 0.3s ease-out;
-  }
-  @keyframes pageEnter {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
   }
 }
 
@@ -336,11 +231,5 @@
   .border.hover-elevate-2:not(.no-hover-interaction-elevate)::after,
   .border.active-elevate-2:not(.no-active-interaction-elevate)::after {
     inset: -1px;
-  }
-
-  /* Gradient text utility */
-  .text-gradient-payra {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--payra-green)), hsl(var(--payra-cyan)));
   }
 }

@@ -11,13 +11,13 @@ export interface ToolDefinition {
 }
 
 export const TOOLS: ToolDefinition[] = [
-  { id: "health-scorecard", name: "AR Health Scorecard", shortName: "Health Scorecard", description: "Grade your AR across 6 categories and see where you're losing cash", icon: ClipboardCheck, time: "~5 min", path: "/tools/health-scorecard" },
-  { id: "dso-calculator", name: "DSO Calculator", shortName: "DSO Calculator", description: "Quantify how much capital is trapped by slow-paying invoices", icon: Calculator, time: "~2 min", path: "/tools/dso-calculator" },
-  { id: "aging-analyzer", name: "AR Aging Analyzer", shortName: "Aging Analyzer", description: "Size your bad debt exposure across aging buckets", icon: BarChart3, time: "~3 min", path: "/tools/aging-analyzer" },
-  { id: "cei-calculator", name: "CEI Calculator", shortName: "CEI Calculator", description: "Measure how effectively your team converts receivables to cash", icon: TrendingUp, time: "~2 min", path: "/tools/cei-calculator" },
-  { id: "timeline-mapper", name: "Invoice-to-Cash Mapper", shortName: "Timeline Mapper", description: "Find the exact stages where your collections cycle stalls", icon: Clock, time: "~4 min", path: "/tools/timeline-mapper" },
-  { id: "cost-calculator", name: "AR Cost Calculator", shortName: "Cost Calculator", description: "See the true per-invoice cost of your AR process vs. best-in-class", icon: DollarSign, time: "~3 min", path: "/tools/cost-calculator" },
-  { id: "erp-readiness", name: "ERP Readiness Check", shortName: "ERP Readiness", description: "Confirm your ERP supports native AR automation with Payra", icon: Settings, time: "~2 min", path: "/tools/erp-readiness" },
+  { id: "health-scorecard", name: "AR Health Scorecard", shortName: "Health Scorecard", description: "Grade your AR process across 6 categories", icon: ClipboardCheck, time: "~5 min", path: "/tools/health-scorecard" },
+  { id: "dso-calculator", name: "DSO Calculator", shortName: "DSO Calculator", description: "Calculate savings from reducing Days Sales Outstanding", icon: Calculator, time: "~2 min", path: "/tools/dso-calculator" },
+  { id: "aging-analyzer", name: "AR Aging Analyzer", shortName: "Aging Analyzer", description: "Assess bad debt risk in your receivables portfolio", icon: BarChart3, time: "~3 min", path: "/tools/aging-analyzer" },
+  { id: "cei-calculator", name: "CEI Calculator", shortName: "CEI Calculator", description: "Measure your Collection Effectiveness Index", icon: TrendingUp, time: "~2 min", path: "/tools/cei-calculator" },
+  { id: "timeline-mapper", name: "Invoice-to-Cash Mapper", shortName: "Timeline Mapper", description: "Map bottlenecks in your invoice-to-cash cycle", icon: Clock, time: "~4 min", path: "/tools/timeline-mapper" },
+  { id: "cost-calculator", name: "AR Cost Calculator", shortName: "Cost Calculator", description: "Calculate the true cost of your AR process", icon: DollarSign, time: "~3 min", path: "/tools/cost-calculator" },
+  { id: "erp-readiness", name: "ERP Readiness Check", shortName: "ERP Readiness", description: "Check Payra compatibility with your ERP", icon: Settings, time: "~2 min", path: "/tools/erp-readiness" },
 ];
 
 export const INDUSTRY_BENCHMARKS = {

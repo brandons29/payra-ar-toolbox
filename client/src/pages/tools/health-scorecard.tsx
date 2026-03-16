@@ -158,9 +158,9 @@ export default function HealthScorecard() {
     }));
 
     return (
-      <div className="page-container space-y-6" data-testid="page-scorecard-results">
+      <div className="p-6 max-w-4xl mx-auto space-y-6" data-testid="page-scorecard-results">
         <div className="flex items-center justify-between gap-2">
-          <h1 className="text-xl font-bold tracking-tight">AR Health Scorecard Results</h1>
+          <h1 className="text-xl font-bold">AR Health Scorecard Results</h1>
           <Button variant="secondary" size="sm" onClick={handleReset}>
             <RotateCcw className="h-3.5 w-3.5 mr-1" /> Retake
           </Button>
@@ -168,7 +168,7 @@ export default function HealthScorecard() {
 
         {/* Overall Score */}
         <Card className="p-6 text-center space-y-2">
-          <div className="mx-auto w-28 h-28 rounded-full border-4 border-primary/20 bg-primary/5 flex items-center justify-center">
+          <div className="mx-auto w-24 h-24 rounded-full border-4 border-primary flex items-center justify-center">
             <div>
               <div className="text-2xl font-bold text-primary">{overallScore}</div>
               <div className={`text-lg font-bold ${getGradeColor(getGrade(overallScore))}`}>{getGrade(overallScore)}</div>
@@ -194,7 +194,7 @@ export default function HealthScorecard() {
         {/* Inline CTA when overall score is poor */}
         {overallScore < 60 && (
           <InlineDemoCTA
-            message={`A score of ${overallScore}/100 means significant cash and efficiency are on the table. See exactly which areas Payra automates for companies like yours.`}
+            message={`A score of ${overallScore}/100 means major opportunities to improve. Schedule a demo to see exactly which areas Payra can transform.`}
             utmContent="scorecard-low-score"
           />
         )}
@@ -215,7 +215,7 @@ export default function HealthScorecard() {
                 <BridgeToPayra
                   body={categories[i].payraFix}
                   stat={categories[i].payraStat}
-                  ctaText="See How Payra Automates This"
+                  ctaText="See How Payra Fixes This"
                   utmContent={`scorecard-${cat.name.toLowerCase().replace(/\s+/g, "-")}`}
                 />
               )}
@@ -225,11 +225,11 @@ export default function HealthScorecard() {
 
         {/* Bottom CTA */}
         <BridgeToPayra
-          heading="Get a custom improvement plan for your AR"
-          body={`With a score of ${overallScore}/100, there are clear opportunities to reduce DSO, cut costs, and eliminate manual work. A Payra specialist can walk you through exactly what changes would have the biggest impact.`}
+          heading="Get Your Personalized AR Improvement Plan"
+          body={`With a score of ${overallScore}/100, there are clear areas where automation can make a measurable difference. Let us walk you through a custom plan for your business.`}
           stat={`${overallScore}/100`}
           statLabel="Your AR Maturity Score"
-          ctaText="Get My Custom AR Plan"
+          ctaText="Schedule Your AR Review"
           utmContent="scorecard-overall"
         />
       </div>
@@ -239,9 +239,9 @@ export default function HealthScorecard() {
   const cat = categories[currentCat];
 
   return (
-    <div className="page-container max-w-3xl space-y-6" data-testid="page-scorecard">
+    <div className="p-6 max-w-3xl mx-auto space-y-6" data-testid="page-scorecard">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold tracking-tight">AR Health Scorecard</h1>
+        <h1 className="text-xl font-bold">AR Health Scorecard</h1>
         <p className="text-sm text-muted-foreground">
           Answer 18 questions across 6 categories to get your AR maturity grade.
         </p>
@@ -267,7 +267,7 @@ export default function HealthScorecard() {
                 <button
                   key={oi}
                   onClick={() => handleAnswer(currentCat, qi, oi)}
-                  className={`text-left px-4 py-2.5 text-sm rounded-lg border transition-all ${
+                  className={`text-left px-3 py-2 text-sm rounded-md border transition-colors ${
                     answers[currentCat][qi] === oi
                       ? "border-primary bg-primary/5 text-foreground"
                       : "border-border bg-card text-muted-foreground hover:border-primary/40"

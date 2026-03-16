@@ -76,8 +76,8 @@ export default function ERPReadiness() {
 
   if (showResults) {
     return (
-      <div className="page-container max-w-3xl space-y-6" data-testid="page-erp-results">
-        <h1 className="text-xl font-bold tracking-tight">ERP Readiness Results</h1>
+      <div className="p-6 max-w-3xl mx-auto space-y-6" data-testid="page-erp-results">
+        <h1 className="text-xl font-bold">ERP Readiness Results</h1>
 
         <Card className="p-6 text-center space-y-4">
           {erpData ? (
@@ -111,11 +111,11 @@ export default function ERPReadiness() {
             <Card className="p-5 space-y-3">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="metric-label">Setup Timeline</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide">Setup Timeline</p>
                   <p className="text-lg font-bold">{erpData.days} business days</p>
                 </div>
                 <div>
-                  <p className="metric-label">Complexity</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide">Complexity</p>
                   <p className="text-lg font-bold capitalize">{erpData.complexity}</p>
                 </div>
               </div>
@@ -137,14 +137,14 @@ export default function ERPReadiness() {
         )}
 
         <BridgeToPayra
-          heading={erpData ? `Go live on ${selectedERP} in ${erpData.days} days — no middleware` : "Let’s map your ERP integration"}
+          heading={erpData ? `Go Live with ${selectedERP} in ${erpData.days} Days` : "Let's Discuss Your ERP"}
           body={erpData
-            ? `With ${selectedERP}, Payra integrates natively in ${erpData.days} business days — bidirectional sync, 99% auto-reconciliation, and zero manual re-keying. See the integration live.`
-            : "We're actively adding new ERP connectors. Let’s discuss your setup and map a custom integration path."
+            ? `With ${selectedERP}, you'll be fully integrated in ${erpData.days} business days — with bidirectional sync, automated reconciliation, and zero manual re-keying. Schedule a demo to see the integration in action.`
+            : "We're actively adding new integrations. Let's discuss your specific ERP and build a custom integration plan."
           }
           stat={erpData ? `${erpData.days} days` : undefined}
           statLabel={erpData ? "to full integration" : undefined}
-          ctaText={erpData ? "See the Integration Roadmap" : "Discuss My ERP Setup"}
+          ctaText={erpData ? "Schedule an Integration Demo" : "Schedule a Call About Your ERP"}
           utmContent={erpData ? `erp-${selectedERP.toLowerCase().replace(/\s+/g, "-")}` : "erp-other"}
         />
 
@@ -157,9 +157,9 @@ export default function ERPReadiness() {
   }
 
   return (
-    <div className="page-container max-w-3xl space-y-6" data-testid="page-erp">
+    <div className="p-6 max-w-3xl mx-auto space-y-6" data-testid="page-erp">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold tracking-tight">ERP Readiness Check</h1>
+        <h1 className="text-xl font-bold">ERP Readiness Check</h1>
         <p className="text-sm text-muted-foreground">
           Check Payra's compatibility with your ERP system and see estimated setup time.
         </p>

@@ -10,7 +10,6 @@ interface AuthContextType {
   signInWithMicrosoft: () => Promise<void>;
   signInWithEmail: (email: string, password: string) => Promise<{ error: AuthError | null }>;
   signUpWithEmail: (email: string, password: string, fullName: string) => Promise<{ error: AuthError | null }>;
-  resetPassword: (email: string) => Promise<{ error: AuthError | null }>;
   signOut: () => Promise<void>;
 }
 
@@ -162,14 +161,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error };
   };
 
-  const resetPassword = async (email: string) => {
-    if (!supabase) return { error: { message: "Auth not configured" } as AuthError };
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: window.location.origin + window.location.pathname + "#/login",
-    });
-    return { error };
-  };
-
   const signOut = async () => {
     if (supabase) await supabase.auth.signOut();
     setUser(null);
@@ -186,7 +177,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         signInWithMicrosoft,
         signInWithEmail,
         signUpWithEmail,
-        resetPassword,
         signOut,
       }}
     >

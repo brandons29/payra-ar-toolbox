@@ -22,6 +22,7 @@ import CostCalculator from "@/pages/tools/cost-calculator";
 import ERPReadiness from "@/pages/tools/erp-readiness";
 import { useLocation } from "wouter";
 import { Loader2 } from "lucide-react";
+import { usePageTracking } from "@/hooks/usePageTracking";
 
 /** Routes that require auth when Supabase is configured */
 function ProtectedRoute({ component: Component }: { component: React.ComponentType }) {
@@ -87,6 +88,7 @@ function AppRoutes() {
 
 function AppLayout() {
   const [location] = useLocation();
+  usePageTracking();
   const isLogin = location === "/login";
   const isRoot = location === "/";
 

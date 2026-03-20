@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { supabase, isSupabaseConfigured } from "./supabase";
 import type { User, Session, AuthError } from "@supabase/supabase-js";
+import { trackLogin, trackSignUp } from "@/lib/analytics";
 
 interface AuthContextType {
   user: User | null;
@@ -126,6 +127,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signInWithGoogle = async () => {
     if (!supabase) return;
+    trackLogin("google");
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -136,6 +138,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signInWithMicrosoft = async () => {
     if (!supabase) return;
+    trackLogin("microsoft");
     await supabase.auth.signInWithOAuth({
       provider: "azure",
       options: {
@@ -148,6 +151,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signInWithEmail = async (email: string, password: string) => {
     if (!supabase) return { error: { message: "Auth not configured" } as AuthError };
     const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (!error) trackLogin("email");
     return { error };
   };
 
@@ -158,6 +162,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       password,
       options: { data: { full_name: fullName } },
     });
+    if (!error) trackSignUp("email");
     return { error };
   };
 

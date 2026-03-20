@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { PAYRA_DEMO_URL } from "@/lib/constants";
 import { ArrowRight, Calendar } from "lucide-react";
+import { trackDemoClick } from "@/lib/analytics";
 
 interface BridgeToPayraProps {
   heading?: string;
@@ -40,7 +41,13 @@ export function BridgeToPayra({
         </div>
       )}
       <Button asChild size="sm" className="mt-2 gap-1.5">
-        <a href={demoUrl} target="_blank" rel="noopener noreferrer" data-testid="link-payra-demo">
+        <a
+          href={demoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-testid="link-payra-demo"
+          onClick={() => trackDemoClick("bridge_to_payra", utmContent)}
+        >
           <Calendar className="h-3.5 w-3.5" />
           {ctaText}
           <ArrowRight className="h-3.5 w-3.5" />
@@ -72,7 +79,13 @@ export function InlineDemoCTA({ message, utmContent }: InlineDemoCTAProps) {
     >
       <p className="flex-1 text-sm text-foreground/80">{message}</p>
       <Button asChild size="sm" variant="default" className="shrink-0 gap-1.5">
-        <a href={demoUrl} target="_blank" rel="noopener noreferrer" data-testid="link-inline-demo">
+        <a
+          href={demoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-testid="link-inline-demo"
+          onClick={() => trackDemoClick("inline_cta", utmContent)}
+        >
           <Calendar className="h-3.5 w-3.5" />
           Book a Demo
         </a>

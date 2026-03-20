@@ -2,6 +2,18 @@
 // This will be replaced by Supabase when connected
 
 import { useSyncExternalStore, useCallback } from "react";
+import { trackToolComplete, trackLeadGenerated, type ToolName } from "@/lib/analytics";
+
+/** Map tool slug IDs to analytics-friendly names */
+const TOOL_ID_TO_NAME: Record<string, ToolName> = {
+  "health-scorecard": "health_scorecard",
+  "dso-calculator": "dso_calculator",
+  "aging-analyzer": "aging_analyzer",
+  "cei-calculator": "cei_calculator",
+  "timeline-mapper": "timeline_mapper",
+  "cost-calculator": "cost_calculator",
+  "erp-readiness": "erp_readiness",
+};
 
 export interface StoredResult {
   toolId: string;
@@ -20,6 +32,18 @@ class ResultsStore {
     this.snapshot = Array.from(this.results.values());
     this.version++;
     this.notify();
+
+    // Fire analytics events
+    const toolName = TOOL_ID_TO_NAME[toolId];
+    if (toolName) {
+      trackToolComplete(toolName, {
+        tools_completed: this.results.size,
+        // Include key result metrics for audience building
+        ...(data.overallScore != null && { overall_score: data.overallScore }),
+        ...(data.headline && { result_headline: data.headline }),
+      });
+      trackLeadGenerated(toolName);
+    }
   }
 
   get(toolId: string): StoredResult | undefined {

@@ -10,6 +10,7 @@ import { BridgeToPayra, InlineDemoCTA } from "@/components/BridgeToPayra";
 import { useResults } from "@/lib/store";
 import { CheckCircle2, XCircle, ArrowRight } from "lucide-react";
 import { PAYRA_CTA_URL } from "@/lib/constants";
+import { useToolTracking } from "@/hooks/useToolTracking";
 
 interface ERPData {
   supported: boolean;
@@ -46,6 +47,7 @@ const INTEGRATION_FEATURES = [
 ];
 
 export default function ERPReadiness() {
+  const { markStarted, reportProgress } = useToolTracking("erp_readiness");
   const { save } = useResults();
   const [erp, setERP] = useState("");
   const [otherERP, setOtherERP] = useState("");
@@ -76,7 +78,7 @@ export default function ERPReadiness() {
 
   if (showResults) {
     return (
-      <div className="p-6 lg:p-8 max-w-3xl mx-auto space-y-6" data-testid="page-erp-results">
+      <div className="p-6 lg:p-8 max-w-3xl mx-auto space-y-6" data-testid="page-erp-results" onChangeCapture={() => markStarted()} onClickCapture={() => markStarted()}>
         <h1 className="text-xl font-bold tracking-tight">ERP Readiness Results</h1>
 
         <Card className="p-6 text-center space-y-4">

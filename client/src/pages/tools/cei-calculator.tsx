@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { BridgeToPayra, InlineDemoCTA } from "@/components/BridgeToPayra";
 import { useResults } from "@/lib/store";
 import { formatCurrency, formatPercent } from "@/lib/constants";
+import { useToolTracking } from "@/hooks/useToolTracking";
 
 const TIERS = [
   { label: "Top Quartile", min: 90, max: 100, color: "text-emerald-600 dark:text-emerald-400" },
@@ -21,6 +22,7 @@ function getTier(score: number) {
 }
 
 export default function CEICalculator() {
+  const { markStarted, reportProgress } = useToolTracking("cei_calculator");
   const { save } = useResults();
   const [beginningAR, setBeginningAR] = useState(1_500_000);
   const [endingAR, setEndingAR] = useState(1_200_000);
@@ -69,7 +71,7 @@ export default function CEICalculator() {
   const gaugeAngle = (calcs.cei / 100) * 180 - 90; // -90 to 90 degrees
 
   return (
-    <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-cei">
+    <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-cei" onChangeCapture={() => markStarted()} onClickCapture={() => markStarted()}>
       <div className="space-y-1">
         <h1 className="text-xl font-bold tracking-tight">CEI Calculator</h1>
         <p className="text-sm text-muted-foreground">

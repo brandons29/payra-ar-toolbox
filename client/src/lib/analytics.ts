@@ -116,3 +116,34 @@ export function trackLeadGenerated(tool: ToolName, email?: string) {
 export function trackNavigation(from: string, to: string) {
   pushEvent("navigation", { nav_from: from, nav_to: to });
 }
+
+// ─── Engagement Events ──────────────────────────────────────────────────
+
+/** User scrolls to a key section of a page */
+export function trackSectionView(section: string, page: string) {
+  pushEvent("section_view", { section_name: section, page_name: page });
+}
+
+/** User interacts with a specific input field */
+export function trackFieldInteraction(tool: ToolName, fieldName: string) {
+  pushEvent("field_interaction", { tool_name: tool, field_name: fieldName });
+}
+
+/** Tracks user engagement milestones (e.g. 25%, 50%, 75% tool completion) */
+export function trackToolProgress(tool: ToolName, progressPct: number) {
+  pushEvent("tool_progress", { tool_name: tool, progress_percent: progressPct });
+}
+
+/** User clicks sign-out */
+export function trackLogout() {
+  pushEvent("logout", {});
+}
+
+/** User views the results summary page */
+export function trackResultsView(completedCount: number, totalTools: number) {
+  pushEvent("results_view", {
+    completed_count: completedCount,
+    total_tools: totalTools,
+    completion_percent: Math.round((completedCount / totalTools) * 100),
+  });
+}

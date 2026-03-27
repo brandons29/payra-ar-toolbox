@@ -8,6 +8,7 @@ import { PayraLogoFull } from "@/components/PayraLogo";
 import { useAuth } from "@/lib/auth";
 import { isSupabaseConfigured } from "@/lib/supabase";
 import { PAYRA_DEMO_URL, PAYRA_PRIVACY_URL } from "@/lib/constants";
+import { trackDemoClick } from "@/lib/analytics";
 import { PerplexityAttribution } from "@/components/PerplexityAttribution";
 import { Loader2, Calendar, Shield, Zap, BarChart3, ArrowRight } from "lucide-react";
 import { SiGoogle } from "react-icons/si";
@@ -295,6 +296,7 @@ export default function Login() {
                 href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=login&utm_campaign=pre-signup`}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackDemoClick("login_pre_signup")}
               >
                 <Calendar className="h-3.5 w-3.5" />
                 Schedule a Demo

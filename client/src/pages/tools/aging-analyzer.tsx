@@ -9,6 +9,7 @@ import { BridgeToPayra, InlineDemoCTA } from "@/components/BridgeToPayra";
 import { useResults } from "@/lib/store";
 import { INDUSTRY_BENCHMARKS, type Industry, formatCurrency, formatPercent } from "@/lib/constants";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
+import { useToolTracking } from "@/hooks/useToolTracking";
 
 const BUCKETS = [
   { label: "Current (0-30 days)", key: "current", writeOffRate: 0.015, color: "hsl(192, 80%, 54%)" },
@@ -19,6 +20,7 @@ const BUCKETS = [
 ];
 
 export default function AgingAnalyzer() {
+  const { markStarted, reportProgress } = useToolTracking("aging_analyzer");
   const { save } = useResults();
   const [totalAR, setTotalAR] = useState(2_000_000);
   const [buckets, setBuckets] = useState<Record<string, number>>({
@@ -83,7 +85,7 @@ export default function AgingAnalyzer() {
   };
 
   return (
-    <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-aging">
+    <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-aging" onChangeCapture={() => markStarted()} onClickCapture={() => markStarted()}>
       <div className="space-y-1">
         <h1 className="text-xl font-bold tracking-tight">AR Aging Analyzer</h1>
         <p className="text-sm text-muted-foreground">

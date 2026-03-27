@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import { PayraLogo } from "./PayraLogo";
 import { TOOLS, PAYRA_DEMO_URL, PAYRA_PRIVACY_URL } from "@/lib/constants";
+import { trackDemoClick, trackLogout } from "@/lib/analytics";
 import { useResults } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
 import { isSupabaseConfigured } from "@/lib/supabase";
@@ -140,7 +141,7 @@ export function AppSidebar() {
               )}
             </div>
             <button
-              onClick={signOut}
+              onClick={() => { trackLogout(); signOut(); }}
               className="text-muted-foreground hover:text-foreground transition-colors shrink-0 p-1 rounded-md hover:bg-muted"
               title="Sign out"
               data-testid="button-logout"
@@ -151,7 +152,7 @@ export function AppSidebar() {
         )}
 
         <Button asChild size="sm" className="w-full gap-1.5 h-9 text-xs font-medium">
-          <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=sidebar&utm_campaign=persistent-cta`} target="_blank" rel="noopener noreferrer" data-testid="link-sidebar-cta">
+          <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=sidebar&utm_campaign=persistent-cta`} target="_blank" rel="noopener noreferrer" data-testid="link-sidebar-cta" onClick={() => trackDemoClick("sidebar_cta")}>
             <Calendar className="h-3.5 w-3.5" />
             Schedule a Demo
             <ArrowRight className="h-3 w-3" />

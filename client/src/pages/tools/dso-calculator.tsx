@@ -9,8 +9,10 @@ import { useResults } from "@/lib/store";
 import { INDUSTRY_BENCHMARKS, type Industry, formatCurrency } from "@/lib/constants";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { TrendingDown, Lightbulb, ArrowDown } from "lucide-react";
+import { useToolTracking } from "@/hooks/useToolTracking";
 
 export default function DSOCalculator() {
+  const { markStarted, reportProgress } = useToolTracking("dso_calculator");
   const { save } = useResults();
   const [revenue, setRevenue] = useState(10_000_000);
   const [currentDSO, setCurrentDSO] = useState(60);
@@ -60,7 +62,7 @@ export default function DSOCalculator() {
   };
 
   return (
-    <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-dso">
+    <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-dso" onChangeCapture={() => markStarted()} onClickCapture={() => markStarted()}>
       <div className="space-y-1">
         <h1 className="text-xl font-bold tracking-tight">DSO Calculator</h1>
         <p className="text-sm text-muted-foreground">

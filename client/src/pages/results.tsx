@@ -5,9 +5,15 @@ import { Badge } from "@/components/ui/badge";
 import { useResults } from "@/lib/store";
 import { TOOLS, PAYRA_DEMO_URL } from "@/lib/constants";
 import { ArrowRight, ClipboardList, Calendar, Sparkles, Check } from "lucide-react";
+import { useEffect } from "react";
+import { trackDemoClick, trackResultsView } from "@/lib/analytics";
 
 export default function Results() {
   const { results, completedCount } = useResults();
+
+  useEffect(() => {
+    trackResultsView(completedCount, TOOLS.length);
+  }, [completedCount]);
 
   return (
     <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-results">
@@ -104,7 +110,7 @@ export default function Results() {
                 Already seeing areas to improve?
               </p>
               <Button asChild variant="outline" className="gap-1.5">
-                <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=results&utm_campaign=partial-complete`} target="_blank" rel="noopener noreferrer">
+                <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=results&utm_campaign=partial-complete`} target="_blank" rel="noopener noreferrer" onClick={() => trackDemoClick("results_partial_complete")}>
                   <Calendar className="h-3.5 w-3.5" /> Book a Demo to Discuss Results
                 </a>
               </Button>
@@ -121,7 +127,7 @@ export default function Results() {
                 You've completed a full AR audit. Schedule a demo to turn these insights into measurable improvements.
               </p>
               <Button asChild className="gap-1.5">
-                <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=results&utm_campaign=all-complete`} target="_blank" rel="noopener noreferrer">
+                <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=results&utm_campaign=all-complete`} target="_blank" rel="noopener noreferrer" onClick={() => trackDemoClick("results_all_complete")}>
                   <Calendar className="h-3.5 w-3.5" /> Schedule Your Payra Demo <ArrowRight className="h-3.5 w-3.5" />
                 </a>
               </Button>

@@ -9,6 +9,7 @@ import { BridgeToPayra, InlineDemoCTA } from "@/components/BridgeToPayra";
 import { useResults } from "@/lib/store";
 import { formatCurrency } from "@/lib/constants";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
+import { useToolTracking } from "@/hooks/useToolTracking";
 
 const COLORS = [
   "hsl(153, 45%, 34%)",
@@ -19,6 +20,7 @@ const COLORS = [
 ];
 
 export default function CostCalculator() {
+  const { markStarted, reportProgress } = useToolTracking("cost_calculator");
   const { save } = useResults();
   const [arStaff, setArStaff] = useState(2);
   const [avgSalary, setAvgSalary] = useState(55_000);
@@ -65,7 +67,7 @@ export default function CostCalculator() {
   };
 
   return (
-    <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-cost">
+    <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-cost" onChangeCapture={() => markStarted()} onClickCapture={() => markStarted()}>
       <div className="space-y-1">
         <h1 className="text-xl font-bold tracking-tight">AR Cost Calculator</h1>
         <p className="text-sm text-muted-foreground">

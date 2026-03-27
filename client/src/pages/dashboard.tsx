@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { TOOLS, PAYRA_DEMO_URL } from "@/lib/constants";
 import { useResults } from "@/lib/store";
 import { Check, ArrowRight, Calendar, TrendingDown, Clock, DollarSign, Sparkles, Target } from "lucide-react";
+import { trackDemoClick } from "@/lib/analytics";
 
 /** Animated SVG progress ring */
 function ProgressRing({ progress, size = 120, strokeWidth = 8 }: { progress: number; size?: number; strokeWidth?: number }) {
@@ -154,7 +155,7 @@ export default function Dashboard() {
               </p>
             </div>
             <Button asChild size="sm" className="gap-1.5 w-full">
-              <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=dashboard&utm_campaign=top-cta`} target="_blank" rel="noopener noreferrer">
+              <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=dashboard&utm_campaign=top-cta`} target="_blank" rel="noopener noreferrer" onClick={() => trackDemoClick("dashboard_top_cta")}>
                 <Calendar className="h-3.5 w-3.5" />
                 Schedule a Demo
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -239,7 +240,7 @@ export default function Dashboard() {
             You've completed a full AR audit. Schedule a demo to turn these insights into measurable improvements.
           </p>
           <Button asChild className="gap-1.5">
-            <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=dashboard&utm_campaign=all-complete`} target="_blank" rel="noopener noreferrer">
+            <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=dashboard&utm_campaign=all-complete`} target="_blank" rel="noopener noreferrer" onClick={() => trackDemoClick("dashboard_all_complete")}>
               <Calendar className="h-3.5 w-3.5" /> Schedule a Demo <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </Button>

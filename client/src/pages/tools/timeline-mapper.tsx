@@ -10,6 +10,7 @@ import { BridgeToPayra, InlineDemoCTA } from "@/components/BridgeToPayra";
 import { useResults } from "@/lib/store";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
+import { useToolTracking } from "@/hooks/useToolTracking";
 
 interface Step {
   name: string;
@@ -35,6 +36,7 @@ const STEPS: Step[] = [
 ];
 
 export default function TimelineMapper() {
+  const { markStarted, reportProgress } = useToolTracking("timeline_mapper");
   const { save } = useResults();
   const [currentStep, setCurrentStep] = useState(0);
   const [days, setDays] = useState(STEPS.map((s) => s.daysDefault));
@@ -76,7 +78,7 @@ export default function TimelineMapper() {
 
   if (showResults) {
     return (
-      <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-timeline-results">
+      <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-timeline-results" onChangeCapture={() => markStarted()} onClickCapture={() => markStarted()}>
         <div className="flex items-center justify-between gap-2">
           <h1 className="text-xl font-bold tracking-tight">Invoice-to-Cash Timeline Results</h1>
           <Button variant="secondary" size="sm" onClick={() => { setShowResults(false); setCurrentStep(0); }}>

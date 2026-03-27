@@ -7,6 +7,7 @@ import { BridgeToPayra, InlineDemoCTA } from "@/components/BridgeToPayra";
 import { useResults } from "@/lib/store";
 import { ArrowRight, ArrowLeft, RotateCcw, Info, Lightbulb } from "lucide-react";
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer } from "recharts";
+import { useToolTracking } from "@/hooks/useToolTracking";
 
 interface Question {
   text: string;
@@ -108,6 +109,7 @@ function getGradeBg(grade: string): string {
 }
 
 export default function HealthScorecard() {
+  const { markStarted, reportProgress } = useToolTracking("health_scorecard");
   const { save, get } = useResults();
   const existing = get("health-scorecard");
   const [answers, setAnswers] = useState<number[][]>(
@@ -166,7 +168,7 @@ export default function HealthScorecard() {
     }));
 
     return (
-      <div className="p-6 lg:p-8 max-w-4xl mx-auto space-y-6" data-testid="page-scorecard-results">
+      <div className="p-6 lg:p-8 max-w-4xl mx-auto space-y-6" data-testid="page-scorecard-results" onChangeCapture={() => markStarted()} onClickCapture={() => markStarted()}>
         <div className="flex items-center justify-between gap-2">
           <h1 className="text-xl font-bold tracking-tight">AR Health Scorecard Results</h1>
           <Button variant="secondary" size="sm" onClick={handleReset} className="gap-1.5">

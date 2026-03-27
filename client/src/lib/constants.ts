@@ -32,6 +32,7 @@ export type Industry = keyof typeof INDUSTRY_BENCHMARKS;
 export const PAYRA_URL = "https://payra.com";
 export const PAYRA_CTA_URL = "https://book.payra.com?utm_source=ar-toolbox&utm_medium=app&utm_campaign=tool-results";
 export const PAYRA_DEMO_URL = "https://book.payra.com";
+export const PAYRA_PRIVACY_URL = "https://docs.google.com/document/d/1dTSS0BRcW-JeiyiCJDO275r9aip6ZX0n/edit";
 
 export function formatCurrency(value: number): string {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value);

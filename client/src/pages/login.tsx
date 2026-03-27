@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { PayraLogoFull } from "@/components/PayraLogo";
 import { useAuth } from "@/lib/auth";
 import { isSupabaseConfigured } from "@/lib/supabase";
-import { PAYRA_DEMO_URL } from "@/lib/constants";
+import { PAYRA_DEMO_URL, PAYRA_PRIVACY_URL } from "@/lib/constants";
 import { PerplexityAttribution } from "@/components/PerplexityAttribution";
 import { Loader2, Calendar, Shield, Zap, BarChart3, ArrowRight } from "lucide-react";
 import { SiGoogle } from "react-icons/si";
@@ -303,8 +303,16 @@ export default function Login() {
             </Button>
           </div>
 
-          <div className="flex justify-center pt-2">
+          <div className="flex flex-col items-center gap-2 pt-2">
             <PerplexityAttribution />
+            <a
+              href={PAYRA_PRIVACY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] text-muted-foreground/50 hover:text-muted-foreground transition-colors"
+            >
+              Privacy Policy
+            </a>
           </div>
         </div>
       </div>

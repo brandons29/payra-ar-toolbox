@@ -14,7 +14,7 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { PayraLogo } from "./PayraLogo";
-import { TOOLS, PAYRA_DEMO_URL } from "@/lib/constants";
+import { TOOLS, PAYRA_DEMO_URL, PAYRA_PRIVACY_URL } from "@/lib/constants";
 import { useResults } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
 import { isSupabaseConfigured } from "@/lib/supabase";
@@ -157,6 +157,17 @@ export function AppSidebar() {
             <ArrowRight className="h-3 w-3" />
           </a>
         </Button>
+
+        <div className="flex justify-center">
+          <a
+            href={PAYRA_PRIVACY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors"
+          >
+            Privacy Policy
+          </a>
+        </div>
       </SidebarFooter>
     </Sidebar>
   );

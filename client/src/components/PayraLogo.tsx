@@ -1,7 +1,7 @@
 import payraLogoSvg from "@/assets/payra-logo.svg";
 
 /** Payra icon mark only — the green/blue chevron */
-function PayraIconMark({ size = 28 }: { size?: number }) {
+export function PayraIconMark({ size = 28 }: { size?: number }) {
   return (
     <svg
       width={size}
@@ -31,7 +31,7 @@ function PayraIconMark({ size = 28 }: { size?: number }) {
 
 /**
  * Full Payra logo — chevron mark + wordmark as an <img> tag.
- * Used on the landing page header where the full horizontal lockup is needed.
+ * Used on the login page where the full horizontal lockup is needed.
  */
 export function PayraLogoFull({ className = "" }: { className?: string }) {
   return (
@@ -39,7 +39,7 @@ export function PayraLogoFull({ className = "" }: { className?: string }) {
       <img
         src={payraLogoSvg}
         alt="Payra"
-        className="h-7"
+        className="h-8"
         draggable={false}
       />
     </div>
@@ -47,16 +47,15 @@ export function PayraLogoFull({ className = "" }: { className?: string }) {
 }
 
 /**
- * Compact Payra logo — chevron icon + "PAYRA" text + "AR Toolbox" label.
- * Used in the sidebar and wherever space is limited.
+ * Compact Payra logo — chevron icon + "PAYRA" text.
+ * Used in the sidebar. No "AR Toolbox" text per brand guidelines.
  */
 export function PayraLogo({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex items-center gap-2 ${className}`} data-testid="logo-payra">
-      <PayraIconMark size={26} />
-      <span className="font-semibold text-base tracking-tight">
-        <span style={{ color: "#022947" }} className="dark:text-white">PAYRA</span>
-        <span className="text-muted-foreground font-normal ml-1.5">AR Toolbox</span>
+    <div className={`flex items-center gap-2.5 ${className}`} data-testid="logo-payra">
+      <PayraIconMark size={28} />
+      <span className="font-semibold text-base tracking-tight text-foreground">
+        PAYRA
       </span>
     </div>
   );

@@ -69,9 +69,9 @@ export default function CEICalculator() {
   const gaugeAngle = (calcs.cei / 100) * 180 - 90; // -90 to 90 degrees
 
   return (
-    <div className="p-6 max-w-4xl mx-auto space-y-6" data-testid="page-cei">
+    <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-cei">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold">CEI Calculator</h1>
+        <h1 className="text-xl font-bold tracking-tight">CEI Calculator</h1>
         <p className="text-sm text-muted-foreground">
           Measure your Collection Effectiveness Index — the percentage of receivables collected in a given period.
         </p>
@@ -79,7 +79,7 @@ export default function CEICalculator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Inputs */}
-        <Card className="lg:col-span-2 p-5 space-y-4">
+        <Card className="premium-card lg:col-span-2 p-6 space-y-4">
           <h2 className="font-semibold text-sm">Period Data</h2>
           {[
             { label: "Beginning AR Balance", value: beginningAR, setter: setBeginningAR, id: "beginning-ar" },
@@ -110,7 +110,7 @@ export default function CEICalculator() {
         {/* Results */}
         <div className="lg:col-span-3 space-y-4">
           {/* Gauge */}
-          <Card className="p-6 text-center space-y-3">
+          <Card className="premium-card p-6 text-center space-y-3">
             <div className="mx-auto w-40 h-24 relative">
               <svg viewBox="0 0 200 110" className="w-full h-full">
                 {/* Background arc */}
@@ -139,7 +139,7 @@ export default function CEICalculator() {
           </Card>
 
           {/* Dollar Impact */}
-          <Card className="p-5 space-y-2">
+          <Card className="premium-card p-5 space-y-2">
             <h3 className="font-semibold text-sm">Dollar Impact</h3>
             <p className="text-sm">
               Each 1-point improvement in CEI = <strong className="text-primary">{formatCurrency(calcs.dollarPerPoint)}</strong> in additional collected revenue per period.
@@ -152,7 +152,7 @@ export default function CEICalculator() {
           </Card>
 
           {/* Benchmark Bar */}
-          <Card className="p-5 space-y-3">
+          <Card className="premium-card p-5 space-y-3">
             <h3 className="font-semibold text-sm">Benchmark Comparison</h3>
             <div className="space-y-2">
               {TIERS.map((tier) => (

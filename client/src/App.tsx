@@ -28,13 +28,15 @@ import { usePageTracking } from "@/hooks/usePageTracking";
 function ProtectedRoute({ component: Component }: { component: React.ComponentType }) {
   const { user, loading } = useAuth();
 
-  // If Supabase not configured, skip auth check (dev mode)
   if (!isSupabaseConfigured) return <Component />;
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-full min-h-[50vh]">
-        <Loader2 className="h-6 w-6 animate-spin text-primary" />
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="h-6 w-6 animate-spin text-primary" />
+          <span className="text-xs text-muted-foreground">Loading...</span>
+        </div>
       </div>
     );
   }
@@ -54,7 +56,6 @@ function RootRedirect() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Show spinner while checking auth (max 3 seconds)
   if (loading && !timedOut) {
     return (
       <div className="flex items-center justify-center h-full min-h-screen">
@@ -63,7 +64,6 @@ function RootRedirect() {
     );
   }
 
-  // Authenticated → dashboard, otherwise → login. No landing page.
   return <Redirect to={user ? "/dashboard" : "/login"} />;
 }
 
@@ -92,7 +92,6 @@ function AppLayout() {
   const isLogin = location === "/login";
   const isRoot = location === "/";
 
-  // Login and root redirect get their own full-screen layouts
   if (isLogin || isRoot) {
     return (
       <div className="min-h-screen">
@@ -103,13 +102,13 @@ function AppLayout() {
 
   return (
     <SidebarProvider style={{ "--sidebar-width": "16rem", "--sidebar-width-icon": "3rem" } as React.CSSProperties}>
-      <div className="flex h-screen w-full">
+      <div className="flex h-screen w-full bg-background">
         <AppSidebar />
         <div className="flex flex-col flex-1 min-w-0">
-          <header className="flex items-center gap-2 p-2 border-b shrink-0">
+          <header className="flex items-center gap-3 px-4 py-2.5 border-b shrink-0 bg-card/50 backdrop-blur-sm">
             <SidebarTrigger data-testid="button-sidebar-toggle" />
           </header>
-          <main className="flex-1 overflow-y-auto">
+          <main className="flex-1 overflow-y-auto custom-scrollbar">
             <AppRoutes />
           </main>
         </div>

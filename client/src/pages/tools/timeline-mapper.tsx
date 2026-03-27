@@ -76,27 +76,27 @@ export default function TimelineMapper() {
 
   if (showResults) {
     return (
-      <div className="p-6 max-w-4xl mx-auto space-y-6" data-testid="page-timeline-results">
+      <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-timeline-results">
         <div className="flex items-center justify-between gap-2">
-          <h1 className="text-xl font-bold">Invoice-to-Cash Timeline Results</h1>
+          <h1 className="text-xl font-bold tracking-tight">Invoice-to-Cash Timeline Results</h1>
           <Button variant="secondary" size="sm" onClick={() => { setShowResults(false); setCurrentStep(0); }}>
             Edit Inputs
           </Button>
         </div>
 
         {/* Summary */}
-        <Card className="p-5 space-y-3">
+        <Card className="premium-card p-5 space-y-3">
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Total Cycle Time</p>
-              <p className="text-xl font-bold text-primary">{totalDays} days</p>
+              <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Total Cycle Time</p>
+              <p className="text-2xl font-bold text-primary tracking-tight">{totalDays} days</p>
             </div>
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Benchmark</p>
+              <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Benchmark</p>
               <p className="text-lg font-bold">{totalBenchmark.toFixed(1)} days</p>
             </div>
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Internal Bottlenecks</p>
+              <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Internal Bottlenecks</p>
               <p className="text-lg font-bold">{calcs.internalDays} days you control</p>
             </div>
           </div>
@@ -106,7 +106,7 @@ export default function TimelineMapper() {
         </Card>
 
         {/* Timeline Chart */}
-        <Card className="p-5">
+        <Card className="premium-card p-5">
           <h3 className="font-semibold text-sm mb-3">Timeline Breakdown</h3>
           <ResponsiveContainer width="100%" height={240}>
             <BarChart data={calcs.chartData} layout="vertical">
@@ -129,11 +129,11 @@ export default function TimelineMapper() {
         </Card>
 
         {/* Step Details */}
-        <Card className="p-5">
+        <Card className="premium-card p-5">
           <h3 className="font-semibold text-sm mb-3">Step-by-Step Analysis</h3>
           <div className="space-y-2">
             {STEPS.map((step, i) => (
-              <div key={i} className="flex items-center justify-between gap-2 py-2 border-b last:border-0">
+              <div key={i} className="flex items-center justify-between gap-2 py-2 border-b last:border-0 hover:bg-muted/30 transition-colors">
                 <div className="flex-1">
                   <span className="text-sm font-medium">{step.name}</span>
                   <span className="text-xs text-muted-foreground ml-2">({step.internal ? "Internal" : "External"})</span>
@@ -176,9 +176,9 @@ export default function TimelineMapper() {
   const step = STEPS[currentStep];
 
   return (
-    <div className="p-6 max-w-3xl mx-auto space-y-6" data-testid="page-timeline">
+    <div className="p-6 lg:p-8 max-w-3xl mx-auto space-y-6" data-testid="page-timeline">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold">Invoice-to-Cash Timeline Mapper</h1>
+        <h1 className="text-xl font-bold tracking-tight">Invoice-to-Cash Timeline Mapper</h1>
         <p className="text-sm text-muted-foreground">Map each step in your invoice-to-cash cycle to find bottlenecks.</p>
       </div>
 
@@ -193,7 +193,7 @@ export default function TimelineMapper() {
       </div>
       <p className="text-xs text-muted-foreground">Step {currentStep + 1} of {STEPS.length}: {step.name}</p>
 
-      <Card className="p-5 space-y-5">
+      <Card className="premium-card p-6 space-y-5">
         <h2 className="font-semibold text-base">{step.label}</h2>
         <SliderInput
           label={step.daysLabel}

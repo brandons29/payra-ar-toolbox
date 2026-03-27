@@ -2,101 +2,249 @@ import { Link } from "wouter";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { TOOLS, PAYRA_CTA_URL, PAYRA_DEMO_URL, formatPercent } from "@/lib/constants";
+import { TOOLS, PAYRA_DEMO_URL } from "@/lib/constants";
 import { useResults } from "@/lib/store";
-import { Check, ArrowRight, CircleCheck, Calendar } from "lucide-react";
-import { MeasurementMarks } from "@/components/ConstructionPatterns";
+import { Check, ArrowRight, Calendar, TrendingDown, Clock, DollarSign, Sparkles, Target } from "lucide-react";
+
+/** Animated SVG progress ring */
+function ProgressRing({ progress, size = 120, strokeWidth = 8 }: { progress: number; size?: number; strokeWidth?: number }) {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (progress / 100) * circumference;
+
+  return (
+    <div className="relative inline-flex items-center justify-center">
+      <svg width={size} height={size} className="progress-ring">
+        {/* Track */}
+        <circle
+          cx={size / 2} cy={size / 2} r={radius}
+          fill="none"
+          stroke="hsl(var(--muted))"
+          strokeWidth={strokeWidth}
+        />
+        {/* Progress */}
+        <circle
+          cx={size / 2} cy={size / 2} r={radius}
+          fill="none"
+          stroke="hsl(var(--primary))"
+          strokeWidth={strokeWidth}
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+          strokeLinecap="round"
+          className="progress-ring-circle"
+        />
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <span className="text-2xl font-bold tracking-tight">{Math.round(progress)}%</span>
+        <span className="text-[10px] text-muted-foreground font-medium">Complete</span>
+      </div>
+    </div>
+  );
+}
+
+/** Industry insight cards for engagement */
+const INDUSTRY_INSIGHTS = [
+  {
+    icon: TrendingDown,
+    stat: "38%",
+    label: "Average DSO Reduction",
+    description: "Companies using automated AR see DSO drop by 38% within 6 months",
+    color: "text-emerald-600 dark:text-emerald-400",
+    bg: "bg-emerald-50 dark:bg-emerald-950/30",
+  },
+  {
+    icon: Clock,
+    stat: "16+ hrs",
+    label: "Monthly Time Saved",
+    description: "AR automation eliminates manual data entry, follow-ups, and reconciliation",
+    color: "text-sky-600 dark:text-sky-400",
+    bg: "bg-sky-50 dark:bg-sky-950/30",
+  },
+  {
+    icon: DollarSign,
+    stat: "99%",
+    label: "Auto-Reconciliation",
+    description: "Automated payment matching eliminates manual cash application errors",
+    color: "text-violet-600 dark:text-violet-400",
+    bg: "bg-violet-50 dark:bg-violet-950/30",
+  },
+];
 
 export default function Dashboard() {
   const { completedCount, isCompleted, overallScore, get } = useResults();
   const progress = (completedCount / TOOLS.length) * 100;
 
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-6 relative" data-testid="page-dashboard">
-      {/* Subtle measurement marks background for dashboard */}
-      <div className="absolute inset-0 pointer-events-none text-foreground overflow-hidden">
-        <MeasurementMarks />
-      </div>
-
-      {/* Welcome */}
-      <div className="space-y-1 relative z-10">
-        <h1 className="text-xl font-bold" data-testid="text-welcome">AR Toolbox Dashboard</h1>
-        <p className="text-sm text-muted-foreground">
-          Run diagnostics on your accounts receivable process and find opportunities.
-        </p>
-      </div>
-
-      {/* Progress Card */}
-      <Card className="p-5 space-y-3 relative z-10">
-        <div className="flex items-center justify-between gap-2">
-          <h2 className="font-semibold text-sm">Your Progress</h2>
-          <Badge variant="secondary">{completedCount} of {TOOLS.length} complete</Badge>
+    <div className="p-6 lg:p-8 max-w-6xl mx-auto space-y-8" data-testid="page-dashboard">
+      {/* Welcome Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="space-y-1">
+          <h1 className="text-xl font-bold tracking-tight" data-testid="text-welcome">AR Diagnostics</h1>
+          <p className="text-sm text-muted-foreground">
+            Benchmark your accounts receivable process and find hidden savings.
+          </p>
         </div>
-        <Progress value={progress} className="h-2" />
-        {overallScore !== null && (
-          <div className="flex items-center gap-2 pt-1">
-            <span className="text-sm text-muted-foreground">AR Health Score:</span>
-            <span className="font-bold text-primary text-lg">{Math.round(overallScore)}/100</span>
-          </div>
+        {completedCount > 0 && (
+          <Button asChild variant="outline" size="sm" className="gap-1.5 shrink-0 self-start">
+            <Link href="/results">
+              <Target className="h-3.5 w-3.5" />
+              View All Results
+            </Link>
+          </Button>
         )}
-        {completedCount === TOOLS.length && (
-          <div className="flex items-center gap-2 p-3 rounded-md bg-primary/5">
-            <CircleCheck className="h-5 w-5 text-primary" />
-            <p className="text-sm font-medium">All diagnostics complete. <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=dashboard&utm_campaign=all-complete`} target="_blank" rel="noopener noreferrer" className="text-primary underline">Schedule a demo to improve these numbers</a>.</p>
+      </div>
+
+      {/* Progress + Score Row */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* Progress Ring Card */}
+        <Card className="premium-card p-6 flex items-center gap-6">
+          <ProgressRing progress={progress} />
+          <div className="space-y-2 flex-1 min-w-0">
+            <h2 className="font-semibold text-sm">Your Progress</h2>
+            <p className="text-xs text-muted-foreground">
+              {completedCount === 0
+                ? "Start your first diagnostic to begin your assessment."
+                : completedCount === TOOLS.length
+                  ? "All diagnostics complete. View your full results."
+                  : `${completedCount} of ${TOOLS.length} tools complete. Keep going.`}
+            </p>
+            {completedCount > 0 && completedCount < TOOLS.length && (
+              <div className="flex items-center gap-1.5 text-xs text-primary font-medium">
+                <Sparkles className="h-3 w-3" />
+                Complete all 7 for a full AR assessment
+              </div>
+            )}
           </div>
-        )}
-        {completedCount > 0 && completedCount < TOOLS.length && (
-          <div className="flex items-center gap-2 p-3 rounded-md bg-muted/50">
-            <Calendar className="h-4 w-4 text-primary shrink-0" />
-            <p className="text-sm text-muted-foreground">Already seeing opportunities? <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=dashboard&utm_campaign=mid-progress`} target="_blank" rel="noopener noreferrer" className="text-primary font-medium">Book a demo</a> to discuss your results so far.</p>
+        </Card>
+
+        {/* AR Health Score */}
+        <Card className="premium-card metric-glow p-6">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">AR Health Score</span>
+              {overallScore !== null && (
+                <Badge className="status-pill status-pill-info text-[10px]">
+                  {overallScore >= 70 ? "Good" : overallScore >= 50 ? "Fair" : "Needs Work"}
+                </Badge>
+              )}
+            </div>
+            {overallScore !== null ? (
+              <div className="animate-count-up">
+                <span className="text-3xl font-bold text-primary tracking-tight">{Math.round(overallScore)}</span>
+                <span className="text-lg text-muted-foreground font-light">/100</span>
+              </div>
+            ) : (
+              <div className="text-2xl font-bold text-muted-foreground/30">--</div>
+            )}
+            <p className="text-xs text-muted-foreground">
+              {overallScore !== null
+                ? `${overallScore >= 52 ? "Above" : "Below"} the industry average of 52`
+                : "Complete the Health Scorecard to get your score"}
+            </p>
           </div>
-        )}
-      </Card>
+        </Card>
+
+        {/* Quick CTA */}
+        <Card className="p-6 border-primary/10 bg-gradient-to-br from-primary/5 via-transparent to-transparent">
+          <div className="flex flex-col h-full justify-between gap-3">
+            <div className="space-y-2">
+              <h3 className="font-semibold text-sm">Ready to improve?</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                See how Payra's ERP-native AR automation can reduce your DSO by 38% and save 16+ hours per month.
+              </p>
+            </div>
+            <Button asChild size="sm" className="gap-1.5 w-full">
+              <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=dashboard&utm_campaign=top-cta`} target="_blank" rel="noopener noreferrer">
+                <Calendar className="h-3.5 w-3.5" />
+                Schedule a Demo
+                <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            </Button>
+          </div>
+        </Card>
+      </div>
 
       {/* Tool Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
-        {TOOLS.map((tool) => {
-          const done = isCompleted(tool.id);
-          const result = get(tool.id);
-          return (
-            <Card key={tool.id} className="p-4 flex flex-col gap-3" data-testid={`card-dash-${tool.id}`}>
-              <div className="flex items-start justify-between gap-2">
-                <div className="h-8 w-8 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
-                  <tool.icon className="h-4 w-4 text-primary" />
+      <div>
+        <h2 className="font-semibold text-sm text-muted-foreground mb-4 uppercase tracking-wider">Diagnostic Tools</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 stagger-children">
+          {TOOLS.map((tool) => {
+            const done = isCompleted(tool.id);
+            const result = get(tool.id);
+            return (
+              <Card
+                key={tool.id}
+                className="premium-card p-5 flex flex-col gap-3 group"
+                data-testid={`card-dash-${tool.id}`}
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="h-10 w-10 rounded-xl bg-primary/8 flex items-center justify-center shrink-0 group-hover:bg-primary/12 transition-colors">
+                    <tool.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  {done ? (
+                    <span className="status-pill status-pill-success">
+                      <Check className="h-3 w-3" /> Done
+                    </span>
+                  ) : (
+                    <span className="text-[10px] text-muted-foreground/60 font-medium">{tool.time}</span>
+                  )}
                 </div>
-                {done ? (
-                  <Badge variant="default" className="text-xs"><Check className="h-3 w-3 mr-1" /> Done</Badge>
-                ) : (
-                  <Badge variant="outline" className="text-xs">{tool.time}</Badge>
-                )}
-              </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-sm">{tool.name}</h3>
-                {done && result?.data?.headline && (
-                  <p className="text-xs text-muted-foreground mt-1">{String(result.data.headline)}</p>
-                )}
-              </div>
-              <Button asChild variant={done ? "secondary" : "default"} size="sm" className="w-full">
-                <Link href={tool.path}>
-                  {done ? "View Results" : "Start"} <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                </Link>
-              </Button>
-            </Card>
-          );
-        })}
+                <div className="flex-1 space-y-1">
+                  <h3 className="font-semibold text-sm">{tool.name}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{tool.description}</p>
+                  {done && result?.data?.headline && (
+                    <p className="text-xs text-primary font-medium mt-1.5">{String(result.data.headline)}</p>
+                  )}
+                </div>
+                <Button asChild variant={done ? "secondary" : "default"} size="sm" className="w-full gap-1">
+                  <Link href={tool.path}>
+                    {done ? "View Results" : "Start Assessment"} <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </Button>
+              </Card>
+            );
+          })}
+        </div>
       </div>
 
-      {/* CTA */}
-      <Card className="p-5 bg-primary/5 dark:bg-primary/10 text-center space-y-3 relative z-10">
-        <h2 className="font-semibold text-sm">Want to improve these numbers?</h2>
-        <p className="text-sm text-muted-foreground">See how Payra's ERP-native AR automation can reduce your DSO by 38%, automate collections, and save 16+ hours a month.</p>
-        <Button asChild className="gap-1.5">
-          <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=dashboard&utm_campaign=bottom-cta`} target="_blank" rel="noopener noreferrer">
-            <Calendar className="h-3.5 w-3.5" /> Schedule a Demo <ArrowRight className="h-3.5 w-3.5" />
-          </a>
-        </Button>
-      </Card>
+      {/* Industry Insights */}
+      <div>
+        <h2 className="font-semibold text-sm text-muted-foreground mb-4 uppercase tracking-wider">Industry Benchmarks</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {INDUSTRY_INSIGHTS.map((insight, i) => (
+            <Card key={i} className="premium-card p-5 space-y-3">
+              <div className={`h-9 w-9 rounded-lg ${insight.bg} flex items-center justify-center`}>
+                <insight.icon className={`h-4.5 w-4.5 ${insight.color}`} />
+              </div>
+              <div>
+                <div className="flex items-baseline gap-1.5">
+                  <span className={`text-2xl font-bold tracking-tight ${insight.color}`}>{insight.stat}</span>
+                  <span className="text-xs text-muted-foreground">{insight.label}</span>
+                </div>
+                <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{insight.description}</p>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom CTA */}
+      {completedCount === TOOLS.length && (
+        <Card className="p-6 text-center space-y-3 border-primary/15 bg-gradient-to-r from-primary/5 via-primary/3 to-transparent animate-fade-in-up">
+          <div className="flex items-center justify-center gap-2">
+            <Sparkles className="h-4 w-4 text-primary" />
+            <h2 className="font-semibold text-sm">All 7 Diagnostics Complete</h2>
+          </div>
+          <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+            You've completed a full AR audit. Schedule a demo to turn these insights into measurable improvements.
+          </p>
+          <Button asChild className="gap-1.5">
+            <a href={`${PAYRA_DEMO_URL}?utm_source=ar-toolbox&utm_medium=dashboard&utm_campaign=all-complete`} target="_blank" rel="noopener noreferrer">
+              <Calendar className="h-3.5 w-3.5" /> Schedule a Demo <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </Button>
+        </Card>
+      )}
     </div>
   );
 }

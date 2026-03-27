@@ -11,11 +11,11 @@ import { INDUSTRY_BENCHMARKS, type Industry, formatCurrency, formatPercent } fro
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
 const BUCKETS = [
-  { label: "Current (0-30 days)", key: "current", writeOffRate: 0.015, color: "hsl(153, 45%, 34%)" },
-  { label: "31-60 days", key: "d31_60", writeOffRate: 0.05, color: "hsl(45, 70%, 50%)" },
-  { label: "61-90 days", key: "d61_90", writeOffRate: 0.15, color: "hsl(30, 80%, 55%)" },
+  { label: "Current (0-30 days)", key: "current", writeOffRate: 0.015, color: "hsl(192, 80%, 54%)" },
+  { label: "31-60 days", key: "d31_60", writeOffRate: 0.05, color: "hsl(153, 68%, 42%)" },
+  { label: "61-90 days", key: "d61_90", writeOffRate: 0.15, color: "hsl(32, 90%, 55%)" },
   { label: "91-120 days", key: "d91_120", writeOffRate: 0.30, color: "hsl(15, 80%, 50%)" },
-  { label: "Over 120 days", key: "d120plus", writeOffRate: 0.50, color: "hsl(0, 70%, 45%)" },
+  { label: "Over 120 days", key: "d120plus", writeOffRate: 0.50, color: "hsl(7, 88%, 59%)" },
 ];
 
 export default function AgingAnalyzer() {
@@ -83,9 +83,9 @@ export default function AgingAnalyzer() {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto space-y-6" data-testid="page-aging">
+    <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-aging">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold">AR Aging Analyzer</h1>
+        <h1 className="text-xl font-bold tracking-tight">AR Aging Analyzer</h1>
         <p className="text-sm text-muted-foreground">
           Assess bad debt exposure and collection risk across your receivables portfolio.
         </p>
@@ -93,7 +93,7 @@ export default function AgingAnalyzer() {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Inputs */}
-        <Card className="lg:col-span-2 p-5 space-y-4">
+        <Card className="premium-card lg:col-span-2 p-6 space-y-4">
           <h2 className="font-semibold text-sm">Enter AR Balances</h2>
           <div className="space-y-1">
             <Label className="text-sm">Industry</Label>
@@ -124,11 +124,11 @@ export default function AgingAnalyzer() {
 
         {/* Results */}
         <div className="lg:col-span-3 space-y-4">
-          <Card className="p-5 space-y-3">
+          <Card className="premium-card p-5 space-y-3">
             <div className="flex items-center justify-between gap-2">
               <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide">Bad Debt Exposure</p>
-                <p className="text-xl font-bold text-primary">{formatCurrency(calcs.totalExposure)}</p>
+                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Bad Debt Exposure</p>
+                <p className="text-xl font-bold tracking-tight text-primary">{formatCurrency(calcs.totalExposure)}</p>
               </div>
               <Badge variant={calcs.riskRating === "Low" ? "default" : "destructive"} className="text-sm">
                 <span className={calcs.riskColor}>{calcs.riskRating} Risk</span>
@@ -148,7 +148,7 @@ export default function AgingAnalyzer() {
           </Card>
 
           {/* Chart */}
-          <Card className="p-5">
+          <Card className="premium-card p-5">
             <h3 className="font-semibold text-sm mb-3">Aging Distribution</h3>
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={calcs.chartData}>
@@ -166,21 +166,21 @@ export default function AgingAnalyzer() {
           </Card>
 
           {/* Priority Matrix */}
-          <Card className="p-5">
+          <Card className="premium-card p-5">
             <h3 className="font-semibold text-sm mb-3">Collections Priority</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b text-left">
-                    <th className="pb-2 font-medium text-muted-foreground">Bucket</th>
-                    <th className="pb-2 font-medium text-muted-foreground">Amount</th>
-                    <th className="pb-2 font-medium text-muted-foreground">Risk %</th>
-                    <th className="pb-2 font-medium text-muted-foreground">Exposure</th>
+                    <th className="pb-2 font-medium text-muted-foreground text-xs uppercase tracking-wider">Bucket</th>
+                    <th className="pb-2 font-medium text-muted-foreground text-xs uppercase tracking-wider">Amount</th>
+                    <th className="pb-2 font-medium text-muted-foreground text-xs uppercase tracking-wider">Risk %</th>
+                    <th className="pb-2 font-medium text-muted-foreground text-xs uppercase tracking-wider">Exposure</th>
                   </tr>
                 </thead>
                 <tbody>
                   {calcs.analysis.map((a) => (
-                    <tr key={a.key} className="border-b last:border-0">
+                    <tr key={a.key} className="border-b last:border-0 hover:bg-muted/30 transition-colors">
                       <td className="py-2">{a.label}</td>
                       <td className="py-2">{formatCurrency(a.amount)}</td>
                       <td className="py-2">{formatPercent(a.writeOffRate * 100, 1)}</td>
@@ -193,7 +193,7 @@ export default function AgingAnalyzer() {
           </Card>
 
           {/* Recovery */}
-          <Card className="p-5">
+          <Card className="premium-card p-5">
             <h3 className="font-semibold text-sm mb-2">Recovery Scenarios</h3>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>

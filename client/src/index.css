@@ -2,71 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
-/* PAYRA AR TOOLBOX — Brand Palette */
-/* Primary: #2F7D5E → HSL 153 45% 34% */
-/* Dark text: #1A2B3C → HSL 210 38% 17% */
-/* Light bg: #F7FAF8 → HSL 150 23% 97% */
+/* PAYRA AR TOOLBOX — Premium Brand Palette */
+/* Primary Cyan: #2CC5E7 → HSL 192 80% 54% */
+/* Dark: #111111 → HSL 0 0% 7% */
+/* Success Green: #22B672 → HSL 153 68% 42% */
+/* Alert Red: #F2513C → HSL 7 88% 59% */
 
 /* LIGHT MODE */
 :root {
-  --button-outline: rgba(0,0,0, .10);
+  --button-outline: rgba(0,0,0, .08);
   --badge-outline: rgba(0,0,0, .05);
   --opaque-button-border-intensity: -8;
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
-  --background: 150 23% 97%;
-  --foreground: 210 38% 17%;
-  --border: 150 8% 89%;
+  --elevate-1: rgba(0,0,0, .025);
+  --elevate-2: rgba(0,0,0, .06);
+  --background: 210 20% 98%;
+  --foreground: 220 25% 12%;
+  --border: 220 13% 91%;
   --card: 0 0% 100%;
-  --card-foreground: 210 38% 17%;
-  --card-border: 150 8% 92%;
-  --sidebar: 150 15% 95%;
-  --sidebar-foreground: 210 38% 17%;
-  --sidebar-border: 150 8% 89%;
-  --sidebar-primary: 153 45% 34%;
+  --card-foreground: 220 25% 12%;
+  --card-border: 220 10% 93%;
+  --sidebar: 220 20% 97%;
+  --sidebar-foreground: 220 25% 12%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-primary: 192 80% 54%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 150 12% 90%;
-  --sidebar-accent-foreground: 210 38% 17%;
-  --sidebar-ring: 153 45% 34%;
+  --sidebar-accent: 210 15% 93%;
+  --sidebar-accent-foreground: 220 25% 12%;
+  --sidebar-ring: 192 80% 54%;
   --popover: 0 0% 100%;
-  --popover-foreground: 210 38% 17%;
-  --popover-border: 150 8% 89%;
-  --primary: 153 45% 34%;
+  --popover-foreground: 220 25% 12%;
+  --popover-border: 220 13% 91%;
+  --primary: 192 80% 54%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 150 10% 93%;
-  --secondary-foreground: 210 38% 17%;
-  --muted: 150 8% 93%;
-  --muted-foreground: 210 10% 46%;
-  --accent: 150 14% 92%;
-  --accent-foreground: 210 38% 17%;
-  --destructive: 0 84% 42%;
+  --secondary: 210 15% 95%;
+  --secondary-foreground: 220 25% 12%;
+  --muted: 210 12% 94%;
+  --muted-foreground: 220 8% 46%;
+  --accent: 210 15% 93%;
+  --accent-foreground: 220 25% 12%;
+  --destructive: 7 88% 59%;
   --destructive-foreground: 0 0% 98%;
-  --input: 150 8% 78%;
-  --ring: 153 45% 34%;
-  --chart-1: 153 45% 34%;
-  --chart-2: 153 45% 45%;
-  --chart-3: 40 74% 50%;
-  --chart-4: 200 60% 45%;
-  --chart-5: 15 80% 55%;
-  --font-sans: Inter, system-ui, sans-serif;
+  --input: 220 10% 82%;
+  --ring: 192 80% 54%;
+  --chart-1: 192 80% 54%;
+  --chart-2: 192 60% 65%;
+  --chart-3: 153 68% 42%;
+  --chart-4: 260 50% 55%;
+  --chart-5: 32 90% 55%;
+  --font-sans: Inter, system-ui, -apple-system, sans-serif;
   --font-serif: Georgia, serif;
-  --font-mono: Menlo, monospace;
-  --radius: .5rem;
-  --shadow-2xs: 0 1px 2px rgba(0,0,0,.04);
-  --shadow-xs: 0 1px 3px rgba(0,0,0,.06);
+  --font-mono: 'JetBrains Mono', Menlo, monospace;
+  --radius: 0.625rem;
+  --shadow-2xs: 0 1px 2px rgba(0,0,0,.03);
+  --shadow-xs: 0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.02);
   --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-  --shadow: 0 2px 6px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
-  --shadow-md: 0 4px 12px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.04);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,.08), 0 4px 8px rgba(0,0,0,.04);
-  --shadow-xl: 0 16px 48px rgba(0,0,0,.10), 0 8px 16px rgba(0,0,0,.05);
+  --shadow: 0 2px 8px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,.08), 0 4px 8px rgba(0,0,0,.03);
+  --shadow-xl: 0 20px 50px rgba(0,0,0,.10), 0 8px 16px rgba(0,0,0,.04);
   --shadow-2xl: 0 24px 64px rgba(0,0,0,.12);
-  --tracking-normal: 0em;
+  --tracking-normal: -0.011em;
   --spacing: 0.25rem;
 
-  /* Payra-specific custom colors */
-  --payra-green: 153 45% 34%;
-  --payra-light-green: 150 40% 93%;
-  --payra-dark: 210 38% 17%;
+  /* Payra brand tokens */
+  --payra-cyan: 192 80% 54%;
+  --payra-cyan-light: 192 60% 95%;
+  --payra-dark: 0 0% 7%;
+  --payra-green: 153 68% 42%;
+  --payra-red: 7 88% 59%;
+  --payra-warm: 32 90% 55%;
+
+  /* Gradient tokens */
+  --gradient-primary: linear-gradient(135deg, hsl(192 80% 54%), hsl(192 70% 42%));
+  --gradient-hero: linear-gradient(135deg, hsl(220 25% 12%) 0%, hsl(210 30% 18%) 50%, hsl(192 40% 22%) 100%);
+  --gradient-card-hover: linear-gradient(135deg, rgba(44,197,231,0.04), rgba(44,197,231,0.01));
 
   /* Fallback for older browsers */
   --sidebar-primary-border: hsl(var(--sidebar-primary));
@@ -85,46 +94,47 @@
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
+/* DARK MODE */
 .dark {
   --button-outline: rgba(255,255,255, .10);
   --badge-outline: rgba(255,255,255, .05);
   --opaque-button-border-intensity: 9;
-  --elevate-1: rgba(255,255,255, .04);
-  --elevate-2: rgba(255,255,255, .09);
-  --background: 200 15% 8%;
-  --foreground: 150 5% 93%;
-  --border: 200 8% 18%;
-  --card: 200 12% 11%;
-  --card-foreground: 150 5% 93%;
-  --card-border: 200 8% 16%;
-  --sidebar: 200 12% 10%;
-  --sidebar-foreground: 150 5% 93%;
-  --sidebar-border: 200 8% 16%;
-  --sidebar-primary: 153 40% 44%;
+  --elevate-1: rgba(255,255,255, .03);
+  --elevate-2: rgba(255,255,255, .07);
+  --background: 220 20% 7%;
+  --foreground: 210 15% 93%;
+  --border: 220 12% 16%;
+  --card: 220 18% 10%;
+  --card-foreground: 210 15% 93%;
+  --card-border: 220 10% 15%;
+  --sidebar: 220 20% 8%;
+  --sidebar-foreground: 210 15% 93%;
+  --sidebar-border: 220 12% 14%;
+  --sidebar-primary: 192 75% 52%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 200 8% 18%;
-  --sidebar-accent-foreground: 150 5% 93%;
-  --sidebar-ring: 153 40% 44%;
-  --popover: 200 12% 12%;
-  --popover-foreground: 150 5% 93%;
-  --popover-border: 200 8% 18%;
-  --primary: 153 40% 44%;
+  --sidebar-accent: 220 10% 16%;
+  --sidebar-accent-foreground: 210 15% 93%;
+  --sidebar-ring: 192 75% 52%;
+  --popover: 220 18% 11%;
+  --popover-foreground: 210 15% 93%;
+  --popover-border: 220 12% 16%;
+  --primary: 192 75% 52%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 200 8% 18%;
-  --secondary-foreground: 150 5% 93%;
-  --muted: 200 6% 20%;
-  --muted-foreground: 150 5% 60%;
-  --accent: 200 8% 18%;
-  --accent-foreground: 150 5% 93%;
-  --destructive: 0 70% 50%;
+  --secondary: 220 10% 16%;
+  --secondary-foreground: 210 15% 93%;
+  --muted: 220 8% 18%;
+  --muted-foreground: 210 8% 55%;
+  --accent: 220 10% 16%;
+  --accent-foreground: 210 15% 93%;
+  --destructive: 7 80% 55%;
   --destructive-foreground: 0 0% 98%;
-  --input: 200 8% 28%;
-  --ring: 153 40% 44%;
-  --chart-1: 153 40% 50%;
-  --chart-2: 153 35% 60%;
-  --chart-3: 40 65% 60%;
-  --chart-4: 200 50% 58%;
-  --chart-5: 15 70% 60%;
+  --input: 220 10% 24%;
+  --ring: 192 75% 52%;
+  --chart-1: 192 70% 58%;
+  --chart-2: 192 55% 68%;
+  --chart-3: 153 60% 50%;
+  --chart-4: 260 45% 60%;
+  --chart-5: 32 80% 60%;
   --shadow-2xs: 0 1px 2px rgba(0,0,0,.2);
   --shadow-xs: 0 1px 3px rgba(0,0,0,.25);
   --shadow-sm: 0 1px 3px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.2);
@@ -134,9 +144,16 @@
   --shadow-xl: 0 16px 48px rgba(0,0,0,.45), 0 8px 16px rgba(0,0,0,.2);
   --shadow-2xl: 0 24px 64px rgba(0,0,0,.5);
 
-  --payra-green: 153 40% 44%;
-  --payra-light-green: 153 20% 16%;
-  --payra-dark: 150 5% 93%;
+  --payra-cyan: 192 75% 52%;
+  --payra-cyan-light: 192 30% 14%;
+  --payra-dark: 210 15% 93%;
+  --payra-green: 153 60% 50%;
+  --payra-red: 7 80% 55%;
+  --payra-warm: 32 80% 60%;
+
+  --gradient-primary: linear-gradient(135deg, hsl(192 75% 52%), hsl(192 65% 40%));
+  --gradient-hero: linear-gradient(135deg, hsl(220 20% 7%) 0%, hsl(215 25% 12%) 50%, hsl(192 30% 16%) 100%);
+  --gradient-card-hover: linear-gradient(135deg, rgba(44,197,231,0.06), rgba(44,197,231,0.02));
 
   --sidebar-primary-border: hsl(var(--sidebar-primary));
   --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
@@ -161,6 +178,125 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    letter-spacing: var(--tracking-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Premium heading treatment */
+  h1, h2, h3 {
+    letter-spacing: -0.025em;
+  }
+}
+
+@layer components {
+  /* Animated gradient border for premium cards */
+  .premium-card {
+    @apply bg-card rounded-xl border border-card-border;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .premium-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: hsl(var(--primary) / 0.15);
+    transform: translateY(-1px);
+  }
+
+  /* Metric card glow */
+  .metric-glow {
+    @apply relative overflow-hidden;
+  }
+  .metric-glow::before {
+    content: '';
+    @apply absolute inset-0 rounded-xl opacity-0;
+    background: radial-gradient(ellipse at 30% 0%, hsl(var(--primary) / 0.08), transparent 70%);
+    transition: opacity 0.3s ease;
+  }
+  .metric-glow:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Pill badge with glow */
+  .status-pill {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .status-pill-success {
+    @apply bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300;
+  }
+  .status-pill-warning {
+    @apply bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300;
+  }
+  .status-pill-danger {
+    @apply bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-300;
+  }
+  .status-pill-info {
+    @apply bg-sky-50 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300;
+  }
+
+  /* Animated progress ring */
+  .progress-ring {
+    transform: rotate(-90deg);
+  }
+  .progress-ring-circle {
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Subtle shimmer animation for loading states */
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .shimmer {
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.05), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  /* Pulse dot for live indicators */
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .pulse-dot {
+    @apply h-2 w-2 rounded-full bg-emerald-500;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  /* Counter animation */
+  @keyframes count-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-count-up {
+    animation: count-up 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Fade in */
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Stagger children animation */
+  .stagger-children > * {
+    opacity: 0;
+    animation: fade-in-up 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  .stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+  .stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+  .stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+  .stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
+  .stagger-children > *:nth-child(8) { animation-delay: 0.4s; }
+
+  /* Glassmorphism panel */
+  .glass-panel {
+    @apply backdrop-blur-xl bg-white/80 dark:bg-gray-900/80 border border-white/20 dark:border-white/10;
   }
 }
 
@@ -231,5 +367,19 @@
   .border.hover-elevate-2:not(.no-hover-interaction-elevate)::after,
   .border.active-elevate-2:not(.no-active-interaction-elevate)::after {
     inset: -1px;
+  }
+
+  /* Scrollbar styling */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
   }
 }

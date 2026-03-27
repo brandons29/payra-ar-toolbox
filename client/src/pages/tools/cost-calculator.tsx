@@ -65,9 +65,9 @@ export default function CostCalculator() {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto space-y-6" data-testid="page-cost">
+    <div className="p-6 lg:p-8 max-w-5xl mx-auto space-y-6" data-testid="page-cost">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold">AR Cost Calculator</h1>
+        <h1 className="text-xl font-bold tracking-tight">AR Cost Calculator</h1>
         <p className="text-sm text-muted-foreground">
           Calculate the true total cost of your accounts receivable process.
         </p>
@@ -75,7 +75,7 @@ export default function CostCalculator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Inputs */}
-        <Card className="lg:col-span-2 p-5 space-y-4">
+        <Card className="premium-card lg:col-span-2 p-6 space-y-4">
           <h2 className="font-semibold text-sm">Your AR Operation</h2>
           <SliderInput label="Number of AR Staff" value={arStaff} onChange={setArStaff} min={1} max={20} testId="slider-ar-staff" />
           <SliderInput label="Average AR Salary" value={avgSalary} onChange={setAvgSalary} min={30_000} max={100_000} step={5_000} prefix="$" testId="slider-salary" />
@@ -99,16 +99,16 @@ export default function CostCalculator() {
         {/* Results */}
         <div className="lg:col-span-3 space-y-4">
           {/* Key Metrics */}
-          <Card className="p-5 space-y-3">
+          <Card className="premium-card p-5 space-y-3">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide">Cost Per Invoice</p>
-                <p className="text-xl font-bold text-primary">{formatCurrency(calcs.costPerInvoice)}</p>
+                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Cost Per Invoice</p>
+                <p className="text-2xl font-bold text-primary tracking-tight">{formatCurrency(calcs.costPerInvoice)}</p>
                 <p className="text-xs text-muted-foreground">Best-in-class: {formatCurrency(calcs.benchmarkCPI)}</p>
               </div>
               <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide">Total Annual AR Cost</p>
-                <p className="text-xl font-bold">{formatCurrency(calcs.totalCost)}</p>
+                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Total Annual AR Cost</p>
+                <p className="text-xl font-bold tracking-tight">{formatCurrency(calcs.totalCost)}</p>
               </div>
             </div>
             {calcs.excessCost > 0 && (
@@ -119,7 +119,7 @@ export default function CostCalculator() {
           </Card>
 
           {/* Donut Chart */}
-          <Card className="p-5">
+          <Card className="premium-card p-5">
             <h3 className="font-semibold text-sm mb-3">Cost Breakdown</h3>
             <ResponsiveContainer width="100%" height={240}>
               <PieChart>
@@ -143,7 +143,7 @@ export default function CostCalculator() {
           </Card>
 
           {/* Breakdown Table */}
-          <Card className="p-5">
+          <Card className="premium-card p-5">
             <h3 className="font-semibold text-sm mb-3">Detailed Breakdown</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -156,7 +156,7 @@ export default function CostCalculator() {
                 </thead>
                 <tbody>
                   {calcs.breakdown.map((b) => (
-                    <tr key={b.name} className="border-b last:border-0">
+                    <tr key={b.name} className="border-b last:border-0 hover:bg-muted/30 transition-colors">
                       <td className="py-2">{b.name}</td>
                       <td className="py-2 text-right font-medium">{formatCurrency(b.value)}</td>
                       <td className="py-2 text-right text-muted-foreground">

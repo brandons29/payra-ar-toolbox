@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { BridgeToPayra, InlineDemoCTA } from "@/components/BridgeToPayra";
 import { useResults } from "@/lib/store";
-import { ArrowRight, ArrowLeft, RotateCcw } from "lucide-react";
+import { ArrowRight, ArrowLeft, RotateCcw, Info, Lightbulb } from "lucide-react";
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer } from "recharts";
 
 interface Question {
@@ -93,10 +93,18 @@ function getGrade(score: number): string {
 
 function getGradeColor(grade: string): string {
   if (grade === "A") return "text-emerald-600 dark:text-emerald-400";
-  if (grade === "B") return "text-blue-600 dark:text-blue-400";
+  if (grade === "B") return "text-sky-600 dark:text-sky-400";
   if (grade === "C") return "text-amber-600 dark:text-amber-400";
   if (grade === "D") return "text-orange-600 dark:text-orange-400";
   return "text-red-600 dark:text-red-400";
+}
+
+function getGradeBg(grade: string): string {
+  if (grade === "A") return "bg-emerald-50 dark:bg-emerald-950/30";
+  if (grade === "B") return "bg-sky-50 dark:bg-sky-950/30";
+  if (grade === "C") return "bg-amber-50 dark:bg-amber-950/30";
+  if (grade === "D") return "bg-orange-50 dark:bg-orange-950/30";
+  return "bg-red-50 dark:bg-red-950/30";
 }
 
 export default function HealthScorecard() {
@@ -116,7 +124,7 @@ export default function HealthScorecard() {
 
   const categoryScores = useMemo(() => {
     return categories.map((cat, ci) => {
-      const raw = answers[ci].reduce((s, a) => s + (a >= 0 ? a + 1 : 0), 0); // 1-4 per question
+      const raw = answers[ci].reduce((s, a) => s + (a >= 0 ? a + 1 : 0), 0);
       const maxRaw = cat.questions.length * 4;
       const normalized = maxRaw > 0 ? (raw / maxRaw) * 100 : 0;
       return { name: cat.name, score: Math.round(normalized), grade: getGrade(normalized) };
@@ -158,20 +166,28 @@ export default function HealthScorecard() {
     }));
 
     return (
-      <div className="p-6 max-w-4xl mx-auto space-y-6" data-testid="page-scorecard-results">
+      <div className="p-6 lg:p-8 max-w-4xl mx-auto space-y-6" data-testid="page-scorecard-results">
         <div className="flex items-center justify-between gap-2">
-          <h1 className="text-xl font-bold">AR Health Scorecard Results</h1>
-          <Button variant="secondary" size="sm" onClick={handleReset}>
-            <RotateCcw className="h-3.5 w-3.5 mr-1" /> Retake
+          <h1 className="text-xl font-bold tracking-tight">AR Health Scorecard Results</h1>
+          <Button variant="secondary" size="sm" onClick={handleReset} className="gap-1.5">
+            <RotateCcw className="h-3.5 w-3.5" /> Retake
           </Button>
         </div>
 
-        {/* Overall Score */}
-        <Card className="p-6 text-center space-y-2">
-          <div className="mx-auto w-24 h-24 rounded-full border-4 border-primary flex items-center justify-center">
-            <div>
-              <div className="text-2xl font-bold text-primary">{overallScore}</div>
-              <div className={`text-lg font-bold ${getGradeColor(getGrade(overallScore))}`}>{getGrade(overallScore)}</div>
+        {/* Overall Score Card */}
+        <Card className="premium-card p-8 text-center space-y-3">
+          <div className="mx-auto w-28 h-28 rounded-full border-[5px] border-primary/20 flex items-center justify-center relative">
+            <svg width="112" height="112" className="absolute inset-0 progress-ring">
+              <circle cx="56" cy="56" r="50" fill="none" stroke="hsl(var(--primary))" strokeWidth="5"
+                strokeDasharray={2 * Math.PI * 50}
+                strokeDashoffset={2 * Math.PI * 50 * (1 - overallScore / 100)}
+                strokeLinecap="round"
+                className="progress-ring-circle"
+              />
+            </svg>
+            <div className="relative z-10">
+              <div className="text-3xl font-bold text-primary tracking-tight animate-count-up">{overallScore}</div>
+              <div className={`text-base font-bold ${getGradeColor(getGrade(overallScore))}`}>{getGrade(overallScore)}</div>
             </div>
           </div>
           <p className="text-sm text-muted-foreground">
@@ -179,13 +195,25 @@ export default function HealthScorecard() {
           </p>
         </Card>
 
+        {/* Contextual tip */}
+        {overallScore < 60 && (
+          <div className="flex items-start gap-3 rounded-xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-800/30 p-4">
+            <Lightbulb className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+            <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
+              Companies scoring below 60 typically see the largest ROI from AR automation — often recovering 30-40% of their manual processing costs within 6 months.
+            </p>
+          </div>
+        )}
+
         {/* Radar Chart */}
-        <Card className="p-4">
+        <Card className="premium-card p-5">
+          <h3 className="text-sm font-semibold mb-1">Category Overview</h3>
+          <p className="text-xs text-muted-foreground mb-3">Your scores vs. industry average (52)</p>
           <ResponsiveContainer width="100%" height={280}>
             <RadarChart data={radarData}>
               <PolarGrid stroke="hsl(var(--border))" />
               <PolarAngleAxis dataKey="category" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
-              <Radar name="Your Score" dataKey="score" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.2} strokeWidth={2} />
+              <Radar name="Your Score" dataKey="score" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.15} strokeWidth={2} />
               <Radar name="Industry Avg" dataKey="benchmark" stroke="hsl(var(--muted-foreground))" fill="none" strokeDasharray="4 4" strokeWidth={1} />
             </RadarChart>
           </ResponsiveContainer>
@@ -200,27 +228,30 @@ export default function HealthScorecard() {
         )}
 
         {/* Category Breakdown */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {categoryScores.map((cat, i) => (
-            <Card key={cat.name} className="p-4 space-y-2">
-              <div className="flex items-center justify-between gap-2">
-                <h3 className="font-semibold text-sm">{cat.name}</h3>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-sm font-bold">{cat.score}</span>
-                  <span className={`text-sm font-bold ${getGradeColor(cat.grade)}`}>{cat.grade}</span>
+        <div>
+          <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">Category Breakdown</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {categoryScores.map((cat, i) => (
+              <Card key={cat.name} className="premium-card p-5 space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="font-semibold text-sm">{cat.name}</h3>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm font-bold">{cat.score}</span>
+                    <span className={`text-xs font-bold px-1.5 py-0.5 rounded-md ${getGradeColor(cat.grade)} ${getGradeBg(cat.grade)}`}>{cat.grade}</span>
+                  </div>
                 </div>
-              </div>
-              <Progress value={cat.score} className="h-1.5" />
-              {cat.score < 70 && (
-                <BridgeToPayra
-                  body={categories[i].payraFix}
-                  stat={categories[i].payraStat}
-                  ctaText="See How Payra Fixes This"
-                  utmContent={`scorecard-${cat.name.toLowerCase().replace(/\s+/g, "-")}`}
-                />
-              )}
-            </Card>
-          ))}
+                <Progress value={cat.score} className="h-1.5" />
+                {cat.score < 70 && (
+                  <BridgeToPayra
+                    body={categories[i].payraFix}
+                    stat={categories[i].payraStat}
+                    ctaText="See How Payra Fixes This"
+                    utmContent={`scorecard-${cat.name.toLowerCase().replace(/\s+/g, "-")}`}
+                  />
+                )}
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* Bottom CTA */}
@@ -237,40 +268,61 @@ export default function HealthScorecard() {
   }
 
   const cat = categories[currentCat];
+  const currentCatAnswered = answers[currentCat].filter((a) => a >= 0).length;
+  const currentCatTotal = cat.questions.length;
 
   return (
-    <div className="p-6 max-w-3xl mx-auto space-y-6" data-testid="page-scorecard">
+    <div className="p-6 lg:p-8 max-w-3xl mx-auto space-y-6" data-testid="page-scorecard">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold">AR Health Scorecard</h1>
+        <h1 className="text-xl font-bold tracking-tight">AR Health Scorecard</h1>
         <p className="text-sm text-muted-foreground">
           Answer 18 questions across 6 categories to get your AR maturity grade.
         </p>
       </div>
 
       {/* Progress */}
-      <div className="space-y-1">
+      <div className="space-y-2">
         <div className="flex items-center justify-between text-xs text-muted-foreground">
-          <span>{cat.name} ({currentCat + 1} of {categories.length})</span>
+          <span className="font-medium">{cat.name} ({currentCat + 1} of {categories.length})</span>
           <span>{answeredCount}/{totalQuestions} answered</span>
         </div>
         <Progress value={(answeredCount / totalQuestions) * 100} className="h-1.5" />
+        {/* Category step indicators */}
+        <div className="flex gap-1.5 pt-1">
+          {categories.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentCat(i)}
+              className={`h-1.5 flex-1 rounded-full transition-colors ${
+                i === currentCat
+                  ? "bg-primary"
+                  : i < currentCat || answers[i].every(a => a >= 0)
+                    ? "bg-primary/30"
+                    : "bg-muted"
+              }`}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Questions */}
-      <Card className="p-5 space-y-6">
-        <h2 className="font-semibold text-base">{cat.name}</h2>
+      <Card className="premium-card p-6 space-y-6">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="font-semibold text-base">{cat.name}</h2>
+          <span className="text-xs text-muted-foreground">{currentCatAnswered}/{currentCatTotal}</span>
+        </div>
         {cat.questions.map((q, qi) => (
-          <div key={qi} className="space-y-2">
+          <div key={qi} className="space-y-2.5">
             <p className="text-sm font-medium">{q.text}</p>
             <div className="grid grid-cols-1 gap-2">
               {q.options.map((opt, oi) => (
                 <button
                   key={oi}
                   onClick={() => handleAnswer(currentCat, qi, oi)}
-                  className={`text-left px-3 py-2 text-sm rounded-md border transition-colors ${
+                  className={`text-left px-4 py-3 text-sm rounded-xl border transition-all duration-150 ${
                     answers[currentCat][qi] === oi
-                      ? "border-primary bg-primary/5 text-foreground"
-                      : "border-border bg-card text-muted-foreground hover:border-primary/40"
+                      ? "border-primary bg-primary/5 text-foreground shadow-sm ring-1 ring-primary/20"
+                      : "border-border bg-card text-muted-foreground hover:border-primary/30 hover:bg-muted/30"
                   }`}
                   data-testid={`button-q${currentCat}-${qi}-opt${oi}`}
                 >
@@ -289,19 +341,21 @@ export default function HealthScorecard() {
           size="sm"
           onClick={() => setCurrentCat(Math.max(0, currentCat - 1))}
           disabled={currentCat === 0}
+          className="gap-1.5"
         >
-          <ArrowLeft className="h-3.5 w-3.5 mr-1" /> Previous
+          <ArrowLeft className="h-3.5 w-3.5" /> Previous
         </Button>
         {currentCat < categories.length - 1 ? (
           <Button
             size="sm"
             onClick={() => setCurrentCat(currentCat + 1)}
+            className="gap-1.5"
           >
-            Next <ArrowRight className="h-3.5 w-3.5 ml-1" />
+            Next <ArrowRight className="h-3.5 w-3.5" />
           </Button>
         ) : (
-          <Button size="sm" onClick={handleSubmit} disabled={!allAnswered}>
-            View Results <ArrowRight className="h-3.5 w-3.5 ml-1" />
+          <Button size="sm" onClick={handleSubmit} disabled={!allAnswered} className="gap-1.5">
+            View Results <ArrowRight className="h-3.5 w-3.5" />
           </Button>
         )}
       </div>

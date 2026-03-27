@@ -76,8 +76,8 @@ export default function ERPReadiness() {
 
   if (showResults) {
     return (
-      <div className="p-6 max-w-3xl mx-auto space-y-6" data-testid="page-erp-results">
-        <h1 className="text-xl font-bold">ERP Readiness Results</h1>
+      <div className="p-6 lg:p-8 max-w-3xl mx-auto space-y-6" data-testid="page-erp-results">
+        <h1 className="text-xl font-bold tracking-tight">ERP Readiness Results</h1>
 
         <Card className="p-6 text-center space-y-4">
           {erpData ? (
@@ -108,21 +108,21 @@ export default function ERPReadiness() {
 
         {erpData && (
           <>
-            <Card className="p-5 space-y-3">
+            <Card className="premium-card p-6 space-y-3">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide">Setup Timeline</p>
+                  <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Setup Timeline</p>
                   <p className="text-lg font-bold">{erpData.days} business days</p>
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide">Complexity</p>
+                  <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Complexity</p>
                   <p className="text-lg font-bold capitalize">{erpData.complexity}</p>
                 </div>
               </div>
               <p className="text-sm text-muted-foreground">{erpData.notes}</p>
             </Card>
 
-            <Card className="p-5 space-y-3">
+            <Card className="premium-card p-6 space-y-3">
               <h3 className="font-semibold text-sm">What the Integration Includes</h3>
               <ul className="space-y-2">
                 {INTEGRATION_FEATURES.map((f) => (
@@ -157,15 +157,15 @@ export default function ERPReadiness() {
   }
 
   return (
-    <div className="p-6 max-w-3xl mx-auto space-y-6" data-testid="page-erp">
+    <div className="p-6 lg:p-8 max-w-3xl mx-auto space-y-6" data-testid="page-erp">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold">ERP Readiness Check</h1>
+        <h1 className="text-xl font-bold tracking-tight">ERP Readiness Check</h1>
         <p className="text-sm text-muted-foreground">
           Check Payra's compatibility with your ERP system and see estimated setup time.
         </p>
       </div>
 
-      <Card className="p-5 space-y-5">
+      <Card className="premium-card p-6 space-y-5">
         <div className="space-y-1">
           <Label className="text-sm font-medium">Which ERP do you use?</Label>
           <Select value={erp} onValueChange={setERP}>

@@ -1,12 +1,15 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/free-toolkit/:path*",
-      "destination": "https://payra-ar-toolbox-open.vercel.app/:path*"
+      "src": "/free-toolkit(.*)",
+      "dest": "https://payra-ar-toolbox-open.vercel.app$1"
     },
     {
-      "source": "/free-toolkit",
-      "destination": "https://payra-ar-toolbox-open.vercel.app/"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }

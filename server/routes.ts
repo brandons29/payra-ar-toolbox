@@ -7,6 +7,32 @@ export async function registerRoutes(server: Server, app: Express) {
     res.json({ status: "ok" });
   });
 
+  // /free-toolkit — serves non-gated AR toolbox in full-viewport iframe
+  // Must be registered before static middleware to take precedence
+  app.get("/free-toolkit", (_req, res) => {
+    res.send(`<!DOCTYPE html>
+<html lang="en" style="margin:0;padding:0;height:100%;overflow:hidden;">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AR Diagnostic Tools for Construction &amp; Distribution | Payra</title>
+  <meta name="description" content="Accounts receivable diagnostic tools for construction and distribution companies. Benchmark your AR, find your gaps, and see what you could recover.">
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #fff; }
+    iframe { display: block; width: 100%; height: 100%; border: none; }
+  </style>
+</head>
+<body>
+  <iframe
+    src="https://payra-ar-toolbox-open.vercel.app/"
+    title="Payra AR Diagnostic Tools"
+    allowfullscreen
+    loading="eager"
+  ></iframe>
+</body>
+</html>`);
+  });
+
   // Future: API routes for Supabase-backed persistence will go here
   // For now, all data is stored client-side in memory
 }

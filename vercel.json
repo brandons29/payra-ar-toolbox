@@ -1,6 +1,6 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/((?!free-toolkit).*)", "destination": "/index.html" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

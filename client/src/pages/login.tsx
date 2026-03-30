@@ -28,7 +28,7 @@ function MicrosoftIcon({ className }: { className?: string }) {
 const TRUST_ITEMS = [
   { icon: BarChart3, text: "7 diagnostic tools for your AR process" },
   { icon: Zap, text: "Instant benchmarks against your industry" },
-  { icon: Shield, text: "Free, no credit card required" },
+  { icon: Shield, text: "No credit card required" },
 ];
 
 export default function Login() {
@@ -126,7 +126,7 @@ export default function Login() {
                 Diagnose your accounts receivable in minutes
               </h1>
               <p className="text-base text-white/60 mt-3 leading-relaxed">
-                Run 7 free diagnostic tools to benchmark your AR performance, identify bottlenecks, and find hidden savings.
+                Run 7 diagnostic tools to benchmark your AR performance, identify bottlenecks, and find hidden savings.
               </p>
             </div>
 
@@ -164,7 +164,7 @@ export default function Login() {
             </h2>
             <p className="text-sm text-muted-foreground">
               {mode === "signup"
-                ? "Sign up to access your free AR diagnostics"
+                ? "Sign up to access your AR diagnostics"
                 : "Sign in to continue your AR assessment"}
             </p>
           </div>
